@@ -12,6 +12,7 @@
  ;; If there is more than one, they won't work right.
  )
 
+
 ;; Larger elpa repository
 (require 'package)
 (add-to-list 'package-archives 
@@ -24,10 +25,12 @@
 (require 'yasnippet)
 (yas-global-mode 1)
 
+(load-file "~/.emacs_credentials")
 
 ;; packages
 ;; yasnippet
 ;; inf-ruby
+;; request
 
 ;;graphics
 (set-face-attribute 'default nil :font "Liberation Mono-10")
@@ -40,8 +43,6 @@
 
 ; always indent with spaces
 (setq-default indent-tabs-mode nil)
-(when window-system
-  (speedbar 1))
 (setq inhibit-startup-screen t)
 (setq transient-mark-mode t)
 (global-font-lock-mode)
@@ -50,11 +51,17 @@
 (auto-image-file-mode)
 (blink-cursor-mode 0)
 
+
 ;;pretty print json
 (defun json-format ()
   (interactive)
   (save-excursion
     (shell-command-on-region (mark) (point) "python -m json.tool" (buffer-name) t)))
+=======
+;;Haskell
+(custom-set-variables
+ '(haskell-mode-hook '(turn-on-haskell-indentation)))
+
 
 ;; set default sql product
 (setq sql-product 'mysql)
@@ -62,23 +69,23 @@
       '((pdb
          (sql-name "pdb")
          (sql-product 'mysql)
-         (sql-user "etl")
+         (sql-user pdb-sql-user)
          (sql-port 3306)
-         (sql-password "5ygasS0!")
-         (sql-server "pdb.inmz.net"))
+         (sql-password pdb-sql-pass)
+         (sql-server pdb-domain))
         (pdw
          (sql-name "pdw")
          (sql-product 'mysql)
-         (sql-user "etl")
-         (sql-password "5ygasS0!")
-         (sql-server "pdw.chatvzrwyvfu.eu-west-1.rds.amazonaws.com"))
+         (sql-user pdb-sql-user)
+         (sql-password pdb-sql-pass)
+         (sql-server pdw-domain))
         (dmp
          (sql-name "dmp")
          (sql-product 'mysql)
-         (sql-user "etl")
+         (sql-user pdb-sql-user)
          (sql-port 5029)
-         (sql-password "5ygasS0!")
-         (sql-server "dmp.inmz.net"))))
+         (sql-password pdb-sql-pass)
+         (sql-server dmp-domain))))
 
 
 (defun sql-pdb ()
@@ -118,25 +125,6 @@
             (sql-rename-buffer)))         
           
 
-
-
-
-;; jabber settings
-(setq
- jabber-history-enabled t
- jabber-use-global-history nil
- jabber-backlog-number 40
- jabber-backlog-days 30)
-
-(setq 
- jabber-account-list '(("daniel@talk.inmz.net")))
-
-(setq jabber-muc-autojoin '("dev@conference.talk.inmz.net" 
-                            "social@conference.talk.inmz.net" 
-                            "dmp@conference.talk.inmz.net" 
-                            "Tech-Support@conference.talk.inmz.net" 
-                            "commits@conference.talk.inmz.net"))
-
 (defvar libnotify-program "/usr/bin/notify-send")
 
 (defun notify-send (title message)
@@ -157,7 +145,6 @@
 (add-hook 'jabber-alert-message-hooks 'libnotify-jabber-notify)
 
 
-
 ; Markdown
 (setq markdown-command "pandoc -H /home/daniel.bowtell/notes/markdown.css")
 
@@ -167,3 +154,25 @@
 ;(add-to-list 'load-path "~/.slime") 
 ;(require 'slime) 
 ;(slime-setup) 
+=======
+
+;; Harvest
+;; Harvest
+(defun harvest-start-timer (project_id task_id)
+  (let ((url-request-method "POST")
+        (url-request-extra-headers `(("Content-Type" . "application/xml") 
+                                     ("User-Agent" . "Emacs Elisp Infectious Media")
+                                     ("Accept" . "application/xml")
+                                     ("Authorization" . ,harvest-token)))
+        (url-request-data (concat "<request><notes> </notes><hours> </hours>
+<project_id type=\"integer\">" project_id "</project_id>
+<task_id type=\"integer\">" task_id "</task_id>
+<spent_at type=\"date\">" (format-time-string "%a, %d %b %Y" (current-time)) "</spent_at></request>")))
+    (with-current-buffer (url-retrieve-synchronously "https://infectiousmedia.harvestapp.com/daily/add") (buffer-string))))
+
+(defun harvest-troubleshoot-start-timer ()
+  "Start the timer on the troubleshooting task"
+ (interactive) (harvest-start-timer "4764174" "2666846"))
+
+
+(defun harvest-bidder-admin-start-timer () (interactive) (harvest-start-timer "4764174" "2666856"))
