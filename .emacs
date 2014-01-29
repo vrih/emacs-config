@@ -57,7 +57,7 @@
   (interactive)
   (save-excursion
     (shell-command-on-region (mark) (point) "python -m json.tool" (buffer-name) t)))
-=======
+
 ;;Haskell
 (custom-set-variables
  '(haskell-mode-hook '(turn-on-haskell-indentation)))
@@ -154,7 +154,7 @@
 ;(add-to-list 'load-path "~/.slime") 
 ;(require 'slime) 
 ;(slime-setup) 
-=======
+
 
 ;; Harvest
 ;; Harvest
