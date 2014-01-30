@@ -176,3 +176,6 @@
 
 
 (defun harvest-bidder-admin-start-timer () (interactive) (harvest-start-timer "4764174" "2666856"))
+
+(add-to-list 'load-path "~/emacs-config/org-reveal/")
+(require 'ox-reveal)
