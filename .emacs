@@ -4,7 +4,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector ["#002b36" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#839496"])
+<<<<<<< HEAD
  '(custom-enabled-themes (quote (leuven)))
+=======
+ '(custom-enabled-themes (quote solarized-dark))
+>>>>>>> 118688cad02021f55dd0e8c26084d2dffb00fa9c
  '(custom-safe-themes (quote ("ab3a5935a219ca4d4c6aea5defc9f4b4199e248d45bf93b9e72e43f1242e44e3" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
  '(fci-rule-color "#073642")
  '(haskell-mode-hook (quote (turn-on-haskell-indentation)))
@@ -31,6 +35,10 @@
       "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
+;; Melpa
+(require 'package)
+(add-to-list 'package-archives
+  '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 ;;yasnippet
 (require 'yasnippet)
@@ -69,9 +77,12 @@
   (save-excursion
     (shell-command-on-region (mark) (point) "python -m json.tool" (buffer-name) t)))
 
+<<<<<<< HEAD
 ;;Haskell
 
 
+=======
+>>>>>>> 118688cad02021f55dd0e8c26084d2dffb00fa9c
 
 ;; set default sql product
 (setq sql-product 'mysql)
@@ -193,6 +204,7 @@
 (setq org-export-htmlize-output-type 'css)
 (add-to-list 'load-path "~/emacs-config/org-reveal/")
 (require 'ox-reveal)
+<<<<<<< HEAD
 (setq org-reveal-root "file:///home/daniel.bowtell/apps/revealjs")
 
 
@@ -208,3 +220,10 @@
 
 
 
+=======
+
+
+;; Org bullets mode
+(require 'org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+>>>>>>> 118688cad02021f55dd0e8c26084d2dffb00fa9c
