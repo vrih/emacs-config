@@ -3,8 +3,16 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote solarized-dark))
- '(custom-safe-themes (quote ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default))))
+ '(ansi-color-names-vector ["#002b36" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#839496"])
+ '(custom-enabled-themes (quote (leuven)))
+ '(custom-safe-themes (quote ("ab3a5935a219ca4d4c6aea5defc9f4b4199e248d45bf93b9e72e43f1242e44e3" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
+ '(fci-rule-color "#073642")
+ '(haskell-mode-hook (quote (turn-on-haskell-indentation)))
+ '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
+ '(highlight-tail-colors (quote (("#073642" . 0) ("#546E00" . 20) ("#00736F" . 30) ("#00629D" . 50) ("#7B6000" . 60) ("#8B2C02" . 70) ("#93115C" . 85) ("#073642" . 100))))
+ '(vc-annotate-background "#93a1a1")
+ '(vc-annotate-color-map (quote ((20 . "#990A1B") (40 . "#FF6E64") (60 . "#cb4b16") (80 . "#7B6000") (100 . "#b58900") (120 . "#DEB542") (140 . "#546E00") (160 . "#859900") (180 . "#B4C342") (200 . "#3F4D91") (220 . "#6c71c4") (240 . "#9EA0E5") (260 . "#2aa198") (280 . "#69CABF") (300 . "#00629D") (320 . "#268bd2") (340 . "#69B7F0") (360 . "#d33682"))))
+ '(vc-annotate-very-old-color "#93115C"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -15,6 +23,9 @@
 
 ;; Larger elpa repository
 (require 'package)
+(add-to-list 'package-archives 
+             '("org-mode" . "http://orgmode.org/elpa/"))
+
 (add-to-list 'package-archives 
     '("marmalade" .
       "http://marmalade-repo.org/packages/"))
@@ -59,8 +70,7 @@
     (shell-command-on-region (mark) (point) "python -m json.tool" (buffer-name) t)))
 
 ;;Haskell
-(custom-set-variables
- '(haskell-mode-hook '(turn-on-haskell-indentation)))
+
 
 
 ;; set default sql product
@@ -177,5 +187,24 @@
 
 (defun harvest-bidder-admin-start-timer () (interactive) (harvest-start-timer "4764174" "2666856"))
 
+
+;;Org Mode Stuff
+(setq org-src-fontify-natively t); syntax highlighting
+(setq org-export-htmlize-output-type 'css)
 (add-to-list 'load-path "~/emacs-config/org-reveal/")
 (require 'ox-reveal)
+(setq org-reveal-root "file:///home/daniel.bowtell/apps/revealjs")
+
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((plantuml . t)))
+
+(setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
+
+
+
+
+
+
+
