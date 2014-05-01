@@ -24,6 +24,9 @@
 ;; Larger elpa repository
 (require 'package)
 (add-to-list 'package-archives 
+             '("org-mode" . "http://orgmode.org/elpa/"))
+
+(add-to-list 'package-archives 
     '("marmalade" .
       "http://marmalade-repo.org/packages/"))
 (package-initialize)
@@ -69,7 +72,6 @@
   (interactive)
   (save-excursion
     (shell-command-on-region (mark) (point) "python -m json.tool" (buffer-name) t)))
-
 
 ;; set default sql product
 (setq sql-product 'mysql)
@@ -183,9 +185,21 @@
 
 (defun harvest-bidder-admin-start-timer () (interactive) (harvest-start-timer "4764174" "2666856"))
 
+
+;;Org Mode Stuff
+(setq org-src-fontify-natively t); syntax highlighting
+(setq org-export-htmlize-output-type 'css)
 (add-to-list 'load-path "~/emacs-config/org-reveal/")
 (require 'ox-reveal)
 
+(setq org-reveal-root "file:///home/daniel.bowtell/apps/revealjs")
+
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((plantuml . t)))
+
+(setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
 
 ;; Org bullets mode
 (require 'org-bullets)
