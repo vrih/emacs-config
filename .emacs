@@ -144,7 +144,7 @@
 ;(defun libnotify-jabber-notify (from buf text proposed-alert)
 ;  "(jabber.el hook) Notify of new Jabber chat messages via libnotify"
 ;  (when (or jabber-message-alert-same-buffer
-            (not (memq (selected-window) (get-buffer-window-list buf))))
+;            (not (memq (selected-window) (get-buffer-window-list buf))))
 ;    (if (jabber-muc-sender-p from)
 ;        (notify-send (format "(PM) %s"
 ;                       (jabber-jid-displayname (jabber-jid-user from)))
@@ -194,7 +194,6 @@
 
 (setq org-reveal-root "file:///home/daniel.bowtell/apps/revealjs")
 
-
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((plantuml . t)))
@@ -205,8 +204,21 @@
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
-
 ;; helm
 (add-to-list 'load-path "/path/to/helm/directory")
 (require 'helm-config)
 (global-set-key (kbd "C-c h") 'helm-mini)
+
+(require 'helm-ls-git)
+(global-set-key (kbd "C-<f6>") 'helm-ls-git-ls)
+
+;; Smartparens
+(require 'smartparens-config)
+
+;; Pretty symbols
+(require 'pretty-symbols)
+
+;; company mode
+(require 'company-mode)
+(add-hook 'after-init-hook 'global-company-mode)
+
