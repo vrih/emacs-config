@@ -141,18 +141,18 @@
   (start-process "notify" " notify"
 		 libnotify-program "--expire-time=4000" title message))
 
-(defun libnotify-jabber-notify (from buf text proposed-alert)
-  "(jabber.el hook) Notify of new Jabber chat messages via libnotify"
-  (when (or jabber-message-alert-same-buffer
-            (not (memq (selected-window) (get-buffer-window-list buf))))
-    (if (jabber-muc-sender-p from)
-        (notify-send (format "(PM) %s"
-                       (jabber-jid-displayname (jabber-jid-user from)))
-               (format "%s: %s" (jabber-jid-resource from) text)))
-      (notify-send (format "%s" (jabber-jid-displayname from))
-             text)))
+;(defun libnotify-jabber-notify (from buf text proposed-alert)
+;  "(jabber.el hook) Notify of new Jabber chat messages via libnotify"
+;  (when (or jabber-message-alert-same-buffer
+;            (not (memq (selected-window) (get-buffer-window-list buf))))
+;    (if (jabber-muc-sender-p from)
+;        (notify-send (format "(PM) %s"
+;                       (jabber-jid-displayname (jabber-jid-user from)))
+;               (format "%s: %s" (jabber-jid-resource from) text)))
+;      (notify-send (format "%s" (jabber-jid-displayname from))
+;             text)))
 
-(add-hook 'jabber-alert-message-hooks 'libnotify-jabber-notify)
+;(add-hook 'jabber-alert-message-hooks 'libnotify-jabber-notify)
 
 
 ; Markdown
@@ -166,7 +166,6 @@
 ;(slime-setup) 
 
 
-;; Harvest
 ;; Harvest
 (defun harvest-start-timer (project_id task_id)
   (let ((url-request-method "POST")
@@ -184,7 +183,6 @@
   "Start the timer on the troubleshooting task"
  (interactive) (harvest-start-timer "4764174" "2666846"))
 
-
 (defun harvest-bidder-admin-start-timer () (interactive) (harvest-start-timer "4764174" "2666856"))
 
 
@@ -196,7 +194,6 @@
 
 (setq org-reveal-root "file:///home/daniel.bowtell/apps/revealjs")
 
-
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((plantuml . t)))
@@ -207,5 +204,26 @@
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
+<<<<<<< HEAD
 ;; Helm
 (global-set-key (kbd "C-c h") 'helm-mini)
+=======
+;; helm
+(add-to-list 'load-path "/path/to/helm/directory")
+(require 'helm-config)
+(global-set-key (kbd "C-c h") 'helm-mini)
+
+(require 'helm-ls-git)
+(global-set-key (kbd "C-<f6>") 'helm-ls-git-ls)
+
+;; Smartparens
+(require 'smartparens-config)
+
+;; Pretty symbols
+(require 'pretty-symbols)
+
+;; company mode
+(require 'company-mode)
+(add-hook 'after-init-hook 'global-company-mode)
+
+>>>>>>> refs/remotes/origin/master
