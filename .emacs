@@ -20,6 +20,10 @@
  ;; If there is more than one, they won't work right.
  )
 
+;;core emacs config
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
 
 ;; Larger elpa repository
 (require 'package)
@@ -87,6 +91,7 @@
          (sql-name "pdw")
          (sql-product 'mysql)
          (sql-user pdb-sql-user)
+         (sql-port 3306)
          (sql-password pdb-sql-pass)
          (sql-server pdw-domain))
         (dmp
@@ -156,7 +161,7 @@
 
 
 ; Markdown
-(setq markdown-command "pandoc -H /home/daniel.bowtell/notes/markdown.css")
+(setq markdown-command "pandoc -H /media/ukpublic/Technology/markdown.css")
 
 
 ;;; Lisp (SLIME) interaction 
@@ -200,11 +205,14 @@
 
 (setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
 
+; Org Agenda
+(setq org-agenda-files (list "/home/daniel.bowtell/notes/todo.org"))
+
+
 ;; Org bullets mode
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
-<<<<<<< HEAD
 ;; Helm
 (global-set-key (kbd "C-c h") 'helm-mini)
 =======
@@ -212,7 +220,6 @@
 (add-to-list 'load-path "/path/to/helm/directory")
 (require 'helm-config)
 (global-set-key (kbd "C-c h") 'helm-mini)
-
 (require 'helm-ls-git)
 (global-set-key (kbd "C-<f6>") 'helm-ls-git-ls)
 
@@ -226,4 +233,5 @@
 (require 'company-mode)
 (add-hook 'after-init-hook 'global-company-mode)
 
->>>>>>> refs/remotes/origin/master
+(eval-after-load "sql"
+      (load-library "sql-indent"))
