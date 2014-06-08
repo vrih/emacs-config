@@ -230,7 +230,7 @@
 (require 'pretty-symbols)
 
 ;; company mode
-(require 'company-mode)
+;(require 'company-mode)
 (add-hook 'after-init-hook 'global-company-mode)
 
 (eval-after-load "sql"
