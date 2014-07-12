@@ -5,7 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector ["#002b36" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#839496"])
  '(custom-enabled-themes (quote solarized-dark))
- '(custom-safe-themes (quote ("ab3a5935a219ca4d4c6aea5defc9f4b4199e248d45bf93b9e72e43f1242e44e3" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
+ '(custom-safe-themes (quote ("60f04e478dedc16397353fb9f33f0d895ea3dab4f581307fbf0aa2f07e658a40" "ab3a5935a219ca4d4c6aea5defc9f4b4199e248d45bf93b9e72e43f1242e44e3" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
  '(fci-rule-color "#073642")
  '(haskell-mode-hook (quote (turn-on-haskell-indentation)))
  '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
@@ -52,8 +52,8 @@
 ;; request
 
 ;;graphics
-(set-face-attribute 'default nil :font "Liberation Mono-10")
-(load-theme 'solarized-dark)
+( set-face-attribute 'default nil :font "Liberation Mono-10")
+(load-theme 'monokai)
 
 ;disable backup
 (setq backup-inhibited t)
@@ -70,74 +70,25 @@
 (auto-image-file-mode)
 (blink-cursor-mode 0)
 
+;; org mode
+(add-to-list 'load-path "/home/daniel.bowtell/emacs-config/vrih")
+
+(setq vrih-pkg-full
+      '(vrih-org
+        vrih-sql
+        vrih-harvest
+        vrih-helm
+        vrih-ido))
+
+(dolist (file vrih-pkg-full)
+  (require file))
+
 
 ;;pretty print json
 (defun json-format ()
   (interactive)
   (save-excursion
     (shell-command-on-region (mark) (point) "python -m json.tool" (buffer-name) t)))
-
-;; set default sql product
-(setq sql-product 'mysql)
-(setq sql-connection-alist
-      '((pdb
-         (sql-name "pdb")
-         (sql-product 'mysql)
-         (sql-user pdb-sql-user)
-         (sql-port 3306)
-         (sql-password pdb-sql-pass)
-         (sql-server pdb-domain))
-        (pdw
-         (sql-name "pdw")
-         (sql-product 'mysql)
-         (sql-user pdb-sql-user)
-         (sql-port 3306)
-         (sql-password pdb-sql-pass)
-         (sql-server pdw-domain))
-        (dmp
-         (sql-name "dmp")
-         (sql-product 'mysql)
-         (sql-user pdb-sql-user)
-         (sql-port 5029)
-         (sql-password pdb-sql-pass)
-         (sql-server dmp-domain))))
-
-
-(defun sql-pdb ()
-  (interactive)
-  (sql-connect-preset 'pdb))
-(defun sql-pdw ()
-  (interactive)
-  (sql-connect-preset 'pdw))
-(defun sql-dmp ()
-  (interactive)
-  (sql-connect-preset 'dmp))
-
-;; this makes all it all happen via M-x sql-pool-host1_db1, etc.
-(defun sql-connect-preset (name)
-  "Connect to a predefined SQL connection listed in `sql-connection-alist'"
-  (eval `(let ,(cdr (assoc name sql-connection-alist))
-           (flet ((sql-get-login (&rest what)))
-             (sql-product-interactive sql-product)))))
-
-;; names the buffer *SQL: <host>_<db>, which is easier to 
-;; find when you M-x list-buffers, or C-x C-b
-(defun sql-make-smart-buffer-name ()
-  "Return a string that can be used to rename a SQLi buffer.
-  This is used to set `sql-alternate-buffer-name' within
-  `sql-interactive-mode'."
-  (or (and (boundp 'sql-name) sql-name)
-      (concat (if (not(string= "" sql-server))
-                  (concat
-                   (or (and (string-match "[0-9.]+" sql-server) sql-server)
-                       (car (split-string sql-server "\\.")))
-                   "/"))
-              sql-database)))
-
-(add-hook 'sql-interactive-mode-hook
-          (lambda ()
-            (setq sql-alternate-buffer-name (sql-make-smart-buffer-name))
-            (sql-rename-buffer)))         
           
 
 (defvar libnotify-program "/usr/bin/notify-send")
@@ -170,67 +121,14 @@
 ;(require 'slime) 
 ;(slime-setup) 
 
-
-;; Harvest
-(defun harvest-start-timer (project_id task_id)
-  (let ((url-request-method "POST")
-        (url-request-extra-headers `(("Content-Type" . "application/xml") 
-                                     ("User-Agent" . "Emacs Elisp Infectious Media")
-                                     ("Accept" . "application/xml")
-                                     ("Authorization" . ,harvest-token)))
-        (url-request-data (concat "<request><notes> </notes><hours> </hours>
-<project_id type=\"integer\">" project_id "</project_id>
-<task_id type=\"integer\">" task_id "</task_id>
-<spent_at type=\"date\">" (format-time-string "%a, %d %b %Y" (current-time)) "</spent_at></request>")))
-    (with-current-buffer (url-retrieve-synchronously "https://infectiousmedia.harvestapp.com/daily/add") (buffer-string))))
-
-(defun harvest-troubleshoot-start-timer ()
-  "Start the timer on the troubleshooting task"
- (interactive) (harvest-start-timer "4764174" "2666846"))
-
-(defun harvest-bidder-admin-start-timer () (interactive) (harvest-start-timer "4764174" "2666856"))
-
-
-;;Org Mode Stuff
-(setq org-src-fontify-natively t); syntax highlighting
-(setq org-export-htmlize-output-type 'css)
-(add-to-list 'load-path "~/emacs-config/org-reveal/")
-(require 'ox-reveal)
-
-(setq org-reveal-root "file:///home/daniel.bowtell/apps/revealjs")
-
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((plantuml . t)))
-
-(setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
-
-; Org Agenda
-(setq org-agenda-files (list "/home/daniel.bowtell/notes/todo.org"))
-
-
-;; Org bullets mode
-(require 'org-bullets)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-
-;; Helm
-(global-set-key (kbd "C-c h") 'helm-mini)
-=======
-;; helm
-(add-to-list 'load-path "/path/to/helm/directory")
-(require 'helm-config)
-(global-set-key (kbd "C-c h") 'helm-mini)
-(require 'helm-ls-git)
-(global-set-key (kbd "C-<f6>") 'helm-ls-git-ls)
-
 ;; Smartparens
 (require 'smartparens-config)
 
 ;; Pretty symbols
-(require 'pretty-symbols)
+;(require 'pretty-symbols)
 
 ;; company mode
-(require 'company-mode)
+;;(require 'company-mode)
 (add-hook 'after-init-hook 'global-company-mode)
 
 (eval-after-load "sql"
