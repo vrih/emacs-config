@@ -70,6 +70,7 @@
         vrih-sql
         vrih-harvest
         vrih-helm
+        vrih-python
         vrih-ido))
 
 (dolist (file vrih-pkg-full)
