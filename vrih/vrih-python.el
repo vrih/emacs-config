@@ -20,7 +20,7 @@
                 (let ((help (get-char-property (point) 'help-echo)))
                         (if help (message "%s" help)))))
 (add-hook 'post-command-hook 'my-flymake-show-help)
- 
+
 ;; Start autopair to complete brackets and quotes
 (add-hook 'python-mode-hook 'autopair-mode)
 
@@ -32,3 +32,5 @@
         (lambda ()
                 (local-set-key (kbd "C-c p") 'pylint)
                 (local-set-key (kbd "C-c o") 'pep8)))
+
+(provide 'vrih-python)

@@ -9,7 +9,7 @@
  'org-babel-load-languages
  '((plantuml . t)))
 
-(setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
+(setq org-plantuml-jar-path "/home/daniel.bowtell/Downloads/plantuml.jar")
 
 (setq org-todo-keywords
       '((sequence "TODO" "WAITING" "|" "DONE" "FAILED")))
@@ -20,7 +20,7 @@
 
 (define-key global-map "\C-cc" 'org-capture)
 
-(global-set-key (kbd "<f5>") 'org-agenda-list) 
+(global-set-key (kbd "<f5>") 'org-agenda-list)
 
 
 ;; Org bullets mode
