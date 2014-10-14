@@ -7,6 +7,10 @@
 (add-to-list 'package-archives
              '("org-mode" . "http://orgmode.org/elpa/"))
 
+;; Datadog
+;(add-to-list 'load-path (expand-file-name "~/emacs-config/datadog.el"))
+;(require 'datadog)
+
 (add-to-list 'package-archives
     '("marmalade" .
       "http://marmalade-repo.org/packages/"))
@@ -22,6 +26,9 @@
 (yas-global-mode 1)
 
 (load-file "~/.emacs_credentials")
+
+
+(require 'org-trello)
 
 ;; packages
 ;; yasnippet
@@ -55,9 +62,9 @@
         vrih-sql
         vrih-harvest
         vrih-magit
-        vrih-helm
         vrih-python
         vrih-mu4e
+        vrih-smartparens
         vrih-ido))
 
 (dolist (file vrih-pkg-full)
@@ -92,7 +99,7 @@
 
 
 ; Markdown
-(setq markdown-command "pandoc -H /media/ukpublic/Technology/markdown.css")
+(setq markdown-command "pandoc -H ~/notes/markdown.css")
 
 
 ;;; Lisp (SLIME) interaction
@@ -108,6 +115,11 @@
 ;(require 'pretty-symbols)
 
 (add-hook 'after-init-hook 'global-company-mode)
+
+(defun vrih-hour-code ()
+  (interactive)
+  (insert (format "%d" (/ (float-time) 3600))))
+
 
 (eval-after-load "sql"
       (load-library "sql-indent"))

@@ -22,6 +22,8 @@
 
 (global-set-key (kbd "<f5>") 'org-agenda-list)
 
+(setq org-agenda-archives-mode nil)
+(setq org-agenda-skip-comment-trees nil)
 
 ;; Org bullets mode
 (require 'org-bullets)

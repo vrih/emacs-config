@@ -1,3 +1,6 @@
 [submodule "org-reveal"]
 	path = org-reveal
 	url = https://github.com/yjwen/org-reveal.git
+[submodule "datadog.el"]
+	path = datadog.el
+	url = git@github.com:wernerandrew/datadog.el.git
