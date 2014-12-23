@@ -1,6 +1,6 @@
-(tool-bar-mode -1)
-(menu-bar-mode -1)
-(scroll-bar-mode -1)
+;(tool-bar-mode -1)
+;(menu-bar-mode -1)
+;(scroll-bar-mode -1)
 
 ;; Larger elpa repository
 (require 'package)
@@ -19,7 +19,7 @@
 ;; Melpa
 (require 'package)
 (add-to-list 'package-archives
-  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  '("melpa" . "http://melpa.org/packages/") t)
 
 ;;yasnippet
 (require 'yasnippet)
@@ -28,7 +28,7 @@
 (load-file "~/.emacs_credentials")
 
 
-(require 'org-trello)
+;(require 'org-trello)
 
 ;; packages
 ;; yasnippet
@@ -37,7 +37,7 @@
 
 ;;graphics
 ( set-face-attribute 'default nil :font "Liberation Mono-10")
-(load-theme 'monokai t)
+;(load-theme 'monokai t)
 
 ;disable backup
 (setq backup-inhibited t)
@@ -63,7 +63,8 @@
         vrih-harvest
         vrih-magit
         vrih-python
-        vrih-mu4e
+        vrih-jedi
+;        vrih-mu4e
         vrih-smartparens
         vrih-ido))
 
@@ -119,6 +120,10 @@
 (defun vrih-hour-code ()
   (interactive)
   (insert (format "%d" (/ (float-time) 3600))))
+
+(defun vrih-period ()
+  (interactive)
+  (insert (format "%d" (/ (float-time) 86400))))
 
 
 (eval-after-load "sql"

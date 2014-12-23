@@ -1,7 +1,7 @@
 (setq org-src-fontify-natively t); syntax highlighting
 (setq org-export-htmlize-output-type 'css)
 (add-to-list 'load-path "~/emacs-config/org-reveal/")
-(require 'ox-reveal)
+;(require 'ox-reveal)
 
 (setq org-reveal-root "file:///home/daniel.bowtell/apps/revealjs")
 
@@ -26,7 +26,7 @@
 (setq org-agenda-skip-comment-trees nil)
 
 ;; Org bullets mode
-(require 'org-bullets)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+;(require 'org-bullets)
+;(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
 (provide 'vrih-org)

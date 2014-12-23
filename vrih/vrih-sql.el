@@ -15,6 +15,13 @@
          (sql-port 3306)
          (sql-password pdb-sql-pass)
          (sql-server pdw-domain))
+        (gpdw
+         (sql-name "gpdw")
+         (sql-product 'mysql)
+         (sql-user pdb-sql-user)
+         (sql-port 3306)
+         (sql-password pdb-sql-pass)
+         (sql-server gpdw-domain))
         (dmp
          (sql-name "dmp")
          (sql-product 'mysql)
@@ -23,13 +30,15 @@
          (sql-password pdb-sql-pass)
          (sql-server dmp-domain))))
 
-
 (defun sql-pdb ()
   (interactive)
-  (sql-connect-preset 'pdb))
+  (sql-connect 'pdb))
+(defun sql-gpdw ()
+  (interactive)
+  (sql-connect 'gpdw))
 (defun sql-pdw ()
   (interactive)
-  (sql-connect-preset 'pdw))
+  (sql-connect 'pdw))
 (defun sql-dmp ()
   (interactive)
   (sql-connect-preset 'dmp))
@@ -41,7 +50,7 @@
            (flet ((sql-get-login (&rest what)))
              (sql-product-interactive sql-product)))))
 
-;; names the buffer *SQL: <host>_<db>, which is easier to 
+;; names the buffer *SQL: <host>_<db>, which is easier to
 ;; find when you M-x list-buffers, or C-x C-b
 (defun sql-make-smart-buffer-name ()
   "Return a string that can be used to rename a SQLi buffer.
