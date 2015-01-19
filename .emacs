@@ -141,3 +141,6 @@
  ;; If there is more than one, they won't work right.
  )
 (put 'upcase-region 'disabled nil)
+
+(setq x-select-enable-clipboard t
+      x-select-enable-primary t)
