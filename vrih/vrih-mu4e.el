@@ -17,7 +17,7 @@
         mu4e-drafts-folder "/INBOX.Drafts"
         mu4e-trash-folder "/INBOX.Trash"
         mu4e-sent-folder "/INBOX.Sent Items"
-        setq mu4e-refile-folder "/INBOX.Archive"))
+        mu4e-refile-folder "/INBOX.Archive"))
 
 (setq mu4e-msg2pdf "/usr/bin/msg2pdf")
 

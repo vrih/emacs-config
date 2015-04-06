@@ -10,7 +10,13 @@
 (add-hook 'python-mode-hook 'autopair-mode)
 
 ;; Delete trailing whitespace when saving (compliance with PEP8)
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(add-hook 'python-mode-hook
+          (lambda()
+            (add-hook 'write-contents-functions
+                      (lambda()
+                        (save-excursion
+                          (delete-trailing-whitespace))))))
+
 
 ;; Custom Keybinds
 (add-hook 'python-mode-hook
