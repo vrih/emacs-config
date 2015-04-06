@@ -28,7 +28,9 @@
 (load-file "~/.emacs_credentials")
 
 
-;(require 'org-trello)
+(require 'org-trello)
+(custom-set-variables '(org-trello-files '("/home/daniel.bowtell/notes/bsm-trello.org" "/home/daniel.bowtell/notes/tech-ops-trello.org")))
+
 
 ;; packages
 ;; yasnippet
@@ -64,7 +66,9 @@
         vrih-magit
         vrih-python
         vrih-jedi
-;        vrih-mu4e
+        vrih-helm
+                                        ;        vrih-mu4e
+        vrih-mouse
         vrih-smartparens
         vrih-ido))
 
