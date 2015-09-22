@@ -1,6 +1,6 @@
-;(tool-bar-mode -1)
-;(menu-bar-mode -1)
-;(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
 
 ;; Larger elpa repository
 (require 'package)
@@ -23,13 +23,37 @@
 
 ;;yasnippet
 (require 'yasnippet)
-(yas-global-mode 1)
+;(yas-global-mode 1)
 
 (load-file "~/.emacs_credentials")
 
 
 (require 'org-trello)
-(custom-set-variables '(org-trello-files '("/home/daniel.bowtell/notes/bsm-trello.org" "/home/daniel.bowtell/notes/tech-ops-trello.org")))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "60f04e478dedc16397353fb9f33f0d895ea3dab4f581307fbf0aa2f07e658a40" default)))
+ '(ledger-reports
+   (quote
+    (("assets" "ledger ")
+     ("bal" "ledger -f %(ledger-file) bal")
+     ("reg" "ledger -f %(ledger-file) reg")
+     ("payee" "ledger -f %(ledger-file) reg @%(payee)")
+     ("account" "ledger -f %(ledger-file) reg %(account)"))))
+ '(org-agenda-files
+   (quote
+    ("~/notes/todo.org" "~/tech-guides/clients/thomas_cook_airlines/thoms_cook_setup.org" "~/tech-guides/clients/b_and_q/setup.org")))
+ '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
+ '(org-trello-files
+   (quote
+    ("/home/daniel.bowtell/notes/bsm-trello.org" "/home/daniel.bowtell/notes/tech-ops-trello.org")) nil (org-trello))
+ '(safe-local-variable-values
+   (quote
+    ((epa-file-encrypt-to daniel\.bowtell@infectiousmedia\.com)))))
 
 
 ;; packages
@@ -38,7 +62,7 @@
 ;; request
 
 ;;graphics
-( set-face-attribute 'default nil :font "Liberation Mono-10")
+;( set-face-attribute 'default nil :font "Liberation Mono-10")
 
 ;; Use monkoai theme on graphical systems
 (when (display-graphic-p)
@@ -68,9 +92,9 @@
         vrih-harvest
         vrih-magit
         vrih-python
-        vrih-jedi
+;        vrih-jedi
         vrih-helm
-                                        ;        vrih-mu4e
+;        vrih-mu4e
         vrih-mouse
         vrih-smartparens
         vrih-ido))
@@ -130,26 +154,12 @@
 
 (defun vrih-period ()
   (interactive)
-  (insert (format "%d" (/ (float-time) 86400))))
+  (insert (format "%d" (/ (float-time) 86400)))16531)
 
 
 (eval-after-load "sql"
       (load-library "sql-indent"))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "60f04e478dedc16397353fb9f33f0d895ea3dab4f581307fbf0aa2f07e658a40" default)))
- '(ledger-reports
-   (quote
-    (("assets" "ledger ")
-     ("bal" "ledger -f %(ledger-file) bal")
-     ("reg" "ledger -f %(ledger-file) reg")
-     ("payee" "ledger -f %(ledger-file) reg @%(payee)")
-     ("account" "ledger -f %(ledger-file) reg %(account)")))))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -160,3 +170,5 @@
 
 (setq x-select-enable-clipboard t
       x-select-enable-primary t)
+
+(projectile-global-mode)

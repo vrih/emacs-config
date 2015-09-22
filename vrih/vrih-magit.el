@@ -1,4 +1,4 @@
 
-(global-set-key (kbd "<f6>") 'magit-status)
+(global-set-key (kbd "C-x g") 'magit-status)
 
 (provide 'vrih-magit)

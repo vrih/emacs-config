@@ -12,7 +12,7 @@
 (setq org-plantuml-jar-path "/home/daniel.bowtell/Downloads/plantuml.jar")
 
 (setq org-todo-keywords
-      '((sequence "TODO" "WAITING" "|" "DONE" "FAILED")))
+      '((sequence "TODO" "WAITING" "IN PROGRESS" "|" "DONE" "CANCELLED")))
 
  (setq org-capture-templates
       '(("t" "Todo" entry (file+headline "~/notes/todo.org" "Tasks")
