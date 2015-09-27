@@ -5,7 +5,12 @@
 ;; Larger elpa repository
 (require 'package)
 (add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives
              '("org-mode" . "http://orgmode.org/elpa/"))
+
+(add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
+
 
 ;; Datadog
 ;(add-to-list 'load-path (expand-file-name "~/emacs-config/datadog.el"))
@@ -62,7 +67,7 @@
 ;; request
 
 ;;graphics
-;( set-face-attribute 'default nil :font "Liberation Mono-10")
+;;( set-face-attribute 'default nil :font "Liberation Mono-10")
 
 ;; Use monkoai theme on graphical systems
 (when (display-graphic-p)
@@ -94,6 +99,7 @@
         vrih-python
 ;        vrih-jedi
         vrih-helm
+        vrih-ledger
 ;        vrih-mu4e
         vrih-mouse
         vrih-smartparens

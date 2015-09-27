@@ -1,3 +1,4 @@
+(setq ledger-master-file "/home/dan/ledger/accounts.ledger")
 
 (setq ledger-reports '(("bal" "ledger -f %(ledger-file) bal")
                        ("reg" "ledger -f %(ledger-file) reg")
