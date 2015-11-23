@@ -20,7 +20,7 @@
 
 (define-key global-map "\C-cc" 'org-capture)
 
-(global-set-key (kbd "<f5>") 'org-agenda-list)
+(global-set-key (kbd "C-x a") 'org-agenda-list)
 
 (setq org-agenda-archives-mode nil)
 (setq org-agenda-skip-comment-trees nil)
