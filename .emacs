@@ -2,29 +2,8 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 
-;; Larger elpa repository
-(require 'package)
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-(add-to-list 'package-archives
-             '("org-mode" . "http://orgmode.org/elpa/"))
-
-(add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
-
-
-;; Datadog
-;(add-to-list 'load-path (expand-file-name "~/emacs-config/datadog.el"))
-;(require 'datadog)
-
-(add-to-list 'package-archives
-    '("marmalade" .
-      "http://marmalade-repo.org/packages/"))
-(package-initialize)
-
-;; Melpa
-(require 'package)
-(add-to-list 'package-archives
-  '("melpa" . "http://melpa.org/packages/") t)
+;; Load packages
+(load "~/emacs-config/vrih/vrih-packages.el")
 
 ;;yasnippet
 (require 'yasnippet)
