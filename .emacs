@@ -65,7 +65,7 @@
  '(magit-diff-use-overlays nil)
  '(org-agenda-files
    (quote
-    ("~/notes/todo.org" "~/tech-guides/clients/thomas_cook_airlines/thoms_cook_setup.org" "~/tech-guides/clients/b_and_q/setup.org")))
+    ("~/infectiousmedia/notes/todo.org" "~/notes/todo.org")))
  '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
  '(org-trello-files
    (quote
