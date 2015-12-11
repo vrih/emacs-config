@@ -42,9 +42,7 @@
      ("payee" "ledger -f %(ledger-file) reg @%(payee)")
      ("account" "ledger -f %(ledger-file) reg %(account)"))))
  '(magit-diff-use-overlays nil)
- '(org-agenda-files
-   (quote
-    ("~/infectiousmedia/notes/todo.org" "~/notes/todo.org")))
+ '(org-agenda-files (quote ("~/notes/todo.org")))
  '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
  '(org-trello-files
    (quote
@@ -196,3 +194,8 @@
       x-select-enable-primary t)
 
 (projectile-global-mode)
+
+
+(defun vrih-fahr-to-cels (x)
+  "Convert fahrenheit to cels"
+  (* (- x 32) (/ 5.0 9)))
