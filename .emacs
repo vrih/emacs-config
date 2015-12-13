@@ -196,3 +196,12 @@
       x-select-enable-primary t)
 
 (projectile-global-mode)
+
+
+;;; temporary holding for date transposer
+(defun my-date-transposition ()
+  (interactive)
+  (while (re-search-forward "\\([0-9]+\\)/\\([0-9]+\\)/\\([0-9]+\\)" nil t)
+    (replace-match (concat (match-string 3) "/"
+                           (match-string 2) "/"
+                           (match-string 1)) nil nil)))
