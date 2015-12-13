@@ -49,17 +49,6 @@
 ;; http://stackoverflow.com/questions/10092322/how-to-automatically-install-emacs-packages-by-specifying-a-list-of-package-name
 (setq url-http-attempt-keepalives nil)
 
-(defun packages-installed-p ()
-  (loop for p in vrih-packages
-        when (not (package-installed-p p)) do (return nil)
-        finally (return t)))
-
-(unless (packages-installed-p)
-  ;; check for new packages (package versions)
-  (message "%s" "Emacs is now refreshing its package database...")
-  (package-refresh-contents)
-  (message "%s" " done.")
-  ;; install the missing packages
-  (dolist (p vrih-packages)
-    (when (not (package-installed-p p))
-      (package-install p))))
+(dolist (p vrih-packages)
+  (unless (package-installed-p p)
+    (package-install p)))

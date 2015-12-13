@@ -42,9 +42,7 @@
      ("payee" "ledger -f %(ledger-file) reg @%(payee)")
      ("account" "ledger -f %(ledger-file) reg %(account)"))))
  '(magit-diff-use-overlays nil)
- '(org-agenda-files
-   (quote
-    ("~/infectiousmedia/notes/todo.org" "~/notes/todo.org")))
+ '(org-agenda-files (quote ("~/notes/todo.org")))
  '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
  '(org-trello-files
    (quote
@@ -198,6 +196,7 @@
 (projectile-global-mode)
 
 
+
 ;;; temporary holding for date transposer
 (defun my-date-transposition ()
   (interactive)
@@ -205,3 +204,8 @@
     (replace-match (concat (match-string 3) "/"
                            (match-string 2) "/"
                            (match-string 1)) nil nil)))
+
+(defun vrih-fahr-to-cels (x)
+  "Convert fahrenheit to cels"
+  (* (- x 32) (/ 5.0 9)))
+
