@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: unix_timestamp
+# key: ut
+# binding: direct-keybinding
+# --
+unix_timestamp($1)

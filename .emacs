@@ -7,12 +7,12 @@
 
 ;;yasnippet
 (require 'yasnippet)
-;(yas-global-mode 1)
+(yas-global-mode 1)
+(setq yas-snippet-dirs '("~/emacs-config/yasnippets" yas-installed-snippets-dir ))
 
 (load-file "~/.emacs_credentials")
 
 
-(require 'org-trello)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -40,16 +40,13 @@
      ("bal" "ledger -f %(ledger-file) bal")
      ("reg" "ledger -f %(ledger-file) reg")
      ("payee" "ledger -f %(ledger-file) reg @%(payee)")
-     ("account" "ledger -f %(ledger-file) reg %(account)"))))
+     ("account" "ledger -f %(ledger-file) reg %(account)"))) t)
  '(magit-diff-use-overlays nil)
  '(org-agenda-files (quote ("~/notes/todo.org")))
- '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
- '(org-trello-files
-   (quote
-    ("/home/daniel.bowtell/notes/bsm-trello.org" "/home/daniel.bowtell/notes/tech-ops-trello.org")) nil (org-trello))
  '(safe-local-variable-values
    (quote
-    ((epa-file-encrypt-to daniel\.bowtell@infectiousmedia\.com))))
+    ((projectile-project-compilation-cmd . "make html")
+     (epa-file-encrypt-to daniel\.bowtell@infectiousmedia\.com))))
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
    (quote
@@ -103,6 +100,8 @@
 (auto-image-file-mode)
 (blink-cursor-mode 0)
 
+(global-set-key "\M-/" 'hippie-expand)
+
 ;; org mode
 (add-to-list 'load-path (concat (getenv "HOME") "/emacs-config/vrih"))
 
@@ -116,7 +115,8 @@
 ;        vrih-jedi
         vrih-helm
         vrih-ledger
-;        vrih-mu4e
+                                        ;        vrih-mu4e
+        vrih-projectile
         vrih-mouse
         vrih-smartparens
         vrih-ido))
@@ -209,3 +209,4 @@
   "Convert fahrenheit to cels"
   (* (- x 32) (/ 5.0 9)))
 
+(require 'projectile-speedbar)
