@@ -42,6 +42,17 @@
     smartparens
     sql-indent
     yaml-mode
+    ac-ispell
+    ac-python
+    ace-flyspell
+    ace-jump-mode
+    auto-complete-rst
+;    clj-refactor-mode
+    color-theme-solarized
+    company-emoji
+    company-go
+    company-restclient
+    company-web    
     ;; neotree
     
    ) "A list of packages to ensure are installed at launch.")

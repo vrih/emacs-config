@@ -15,7 +15,7 @@
       '((sequence "TODO" "WAITING" "IN PROGRESS" "|" "DONE" "CANCELLED")))
 
  (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/notes/todo.org" "Tasks")
+      '(("t" "Todo" entry (file+headline "~/Documents/todo.org" "Tasks")
              "* TODO %?\n  %i")))
 
 (define-key global-map "\C-cc" 'org-capture)
