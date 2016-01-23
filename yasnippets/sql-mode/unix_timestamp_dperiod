@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: unix_timestamp_dperiod
+# key: utd
+# binding: direct-keybinding
+# --
+unix_timestamp($1) div 86400

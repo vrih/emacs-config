@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: like
+# key: l
+# binding: direct-keybinding
+# --
+LIKE '%$1%'

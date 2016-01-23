@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: between_hperiod
+# key: bthp
+# binding: direct-keybinding
+# --
+
+BETWEEN UNIX_TIMESTAMP($1) DIV 3600 AND UNIX_TIMESTAMP($2) DIV 3600

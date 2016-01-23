@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: join
+# key: j
+# binding: direct-keybinding
+# --
+JOIN $1 $2 ON $3 = $4
