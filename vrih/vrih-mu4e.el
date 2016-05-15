@@ -39,5 +39,5 @@
 
 (global-set-key (kbd "<f7>") 'mu4e)
 
-(require 'smtpmail)
+;(require 'smtpmail)
 (provide 'vrih-mu4e)

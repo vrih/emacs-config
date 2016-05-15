@@ -7,12 +7,14 @@
 
 (org-babel-do-load-languages
  'org-babel-load-languages
- '((plantuml . t)))
+ '((plantuml . t)
+   (sql . t)))
+
 
 (setq org-plantuml-jar-path "/home/daniel.bowtell/Downloads/plantuml.jar")
 
 (setq org-todo-keywords
-      '((sequence "TODO" "WAITING" "IN PROGRESS" "|" "DONE" "CANCELLED")))
+      '((sequence "BACKLOG" "TODO" "WAITING" "IN PROGRESS" "|" "DONE" "CANCELLED")))
 
  (setq org-capture-templates
       '(("t" "Todo" entry (file+headline "~/Documents/todo.org" "Tasks")
@@ -22,8 +24,13 @@
 
 (global-set-key (kbd "C-x a") 'org-agenda-list)
 
+(setq org-refile-targets (quote ((nil :maxlevel . 9)
+                                 (org-agenda-files :maxlevel . 9))))
+
 (setq org-agenda-archives-mode nil)
 (setq org-agenda-skip-comment-trees nil)
+(setq org-refile-use-outline-path t)
+(setq org-outline-path-complete-in-steps nil)
 
 ;; Org bullets mode
 ;(require 'org-bullets)

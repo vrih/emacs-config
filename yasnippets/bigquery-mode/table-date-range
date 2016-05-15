@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: table-date-range
+# key: tdr
+# binding: direct-keybinding
+# --
+TABLE_DATE_RANGE($1_, TIMESTAMP('$2'), TIMESTAMP('$3'))$0

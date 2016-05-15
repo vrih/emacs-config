@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: font-awesome 
+# key: fa
+# binding: direct-keybinding
+# --
+:raw-html:\`<i class="fa fa-$1"></i>\`
+
