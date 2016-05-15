@@ -25,10 +25,10 @@
 (define-key sp-keymap (kbd "M-<delete>") 'sp-unwrap-sexp)
 (define-key sp-keymap (kbd "M-<backspace>") 'sp-backward-unwrap-sexp)
 
-(define-key sp-keymap (kbd "C-M-s") 'sp-forward-slurp-sexp)
-(define-key sp-keymap (kbd "C-M-b") 'sp-forward-barf-sexp)
-(define-key sp-keymap (kbd "C-M-<left>") 'sp-backward-slurp-sexp)
-(define-key sp-keymap (kbd "C-M-<right>") 'sp-backward-barf-sexp)
+(define-key sp-keymap (kbd "C-M-<right>") 'sp-forward-slurp-sexp)
+(define-key sp-keymap (kbd "C-M-<left>") 'sp-forward-barf-sexp)
+(define-key sp-keymap (kbd "C-M-s") 'sp-backward-slurp-sexp)
+(define-key sp-keymap (kbd "C-M-b") 'sp-backward-barf-sexp)
 
 (define-key sp-keymap (kbd "M-D") 'sp-splice-sexp)
 (define-key sp-keymap (kbd "C-M-<delete>") 'sp-splice-sexp-killing-forward)
