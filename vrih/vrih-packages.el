@@ -44,6 +44,7 @@
     yaml-mode
     ac-ispell
     ac-python
+    ac-nrepl
     ace-flyspell
     ace-jump-mode
     auto-complete-rst
