@@ -2,7 +2,7 @@
 (global-set-key (kbd "M-x") 'helm-M-x)
 
 
-(require 'helm-config)
+;(require 'helm-config)
 ;; helm
 (add-to-list 'load-path "/path/to/helm/directory")
 ;; helm does buffer switching

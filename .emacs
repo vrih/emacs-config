@@ -1,14 +1,20 @@
-(tool-bar-mode -1)
-(menu-bar-mode -1)
-(scroll-bar-mode -1)
+;(tool-bar-mode -1)
+;(menu-bar-mode -1)
+;(scroll-bar-mode -1)
 
 ;; Load packages
-(load "~/emacs-config/vrih/vrih-packages.el")
+;(load "~/emacs-config/vrih/vrih-packages.el")
 
 ;;yasnippet
+<<<<<<< HEAD
 (require 'yasnippet)
 (setq yas-snippet-dirs '("~/emacs-config/yasnippets" yas-installed-snippets-dir ))
 (yas-global-mode 1)
+=======
+;(require 'yasnippet)
+;(yas-global-mode 1)
+;(setq yas-snippet-dirs '("~/emacs-config/yasnippets" yas-installed-snippets-dir ))
+>>>>>>> main tidy
 
 (load-file "~/.emacs_credentials")
 
@@ -120,14 +126,12 @@
         vrih-magit
         vrih-python
         vrih-js
-;        vrih-jedi
         vrih-helm
         vrih-ledger
-                                        ;        vrih-mu4e
         vrih-projectile
         vrih-mouse
-        vrih-smartparens
-        vrih-ido))
+        vrih-ido
+        vrih-packages))
 
 (dolist (file vrih-pkg-full)
   (require file))
@@ -138,27 +142,6 @@
   (interactive)
   (save-excursion
     (shell-command-on-region (mark) (point) "python -m json.tool" (buffer-name) t)))
-
-
-(defvar libnotify-program "/usr/bin/notify-send")
-
-(defun notify-send (title message)
-  (start-process "notify" " notify"
-		 libnotify-program "--expire-time=4000" title message))
-
-;(defun libnotify-jabber-notify (from buf text proposed-alert)
-;  "(jabber.el hook) Notify of new Jabber chat messages via libnotify"
-;  (when (or jabber-message-alert-same-buffer
-;            (not (memq (selected-window) (get-buffer-window-list buf))))
-;    (if (jabber-muc-sender-p from)
-;        (notify-send (format "(PM) %s"
-;                       (jabber-jid-displayname (jabber-jid-user from)))
-;               (format "%s: %s" (jabber-jid-resource from) text)))
-;      (notify-send (format "%s" (jabber-jid-displayname from))
-;             text)))
-
-;(add-hook 'jabber-alert-message-hooks 'libnotify-jabber-notify)
-
 
 ; Markdown
 (setq markdown-command "pandoc -H ~/notes/markdown.css")
@@ -171,7 +154,7 @@
 ;(slime-setup)
 
 ;; Smartparens
-(require 'smartparens-config)
+;(require 'smartparens-config)
 
 ;; Pretty symbols
 ;(require 'pretty-symbols)
@@ -188,8 +171,8 @@
   (insert (format "%d" (/ (float-time) 86400)))16531)
 
 
-(eval-after-load "sql"
-      (load-library "sql-indent"))
+;(eval-after-load "sql"
+;      (load-library "sql-indent"))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -202,6 +185,7 @@
 (setq x-select-enable-clipboard t
       x-select-enable-primary t)
 
+<<<<<<< HEAD
 (projectile-global-mode)
 
 
@@ -210,6 +194,8 @@
 (require 'edit-server)
 (edit-server-start)
 
+=======
+>>>>>>> main tidy
 ;;; temporary holding for date transposer
 (defun my-date-transposition ()
   (interactive)
@@ -221,6 +207,7 @@
 (defun vrih-fahr-to-cels (x)
   "Convert fahrenheit to cels"
   (* (- x 32) (/ 5.0 9)))
+<<<<<<< HEAD
 
 
 (setq message-send-mail-function 'message-send-mail-with-sendmail)
@@ -232,3 +219,5 @@
         gnus-thread-sort-by-score))
 
 (setq browse-url-generic-program "google-chrome-stable" )
+=======
+>>>>>>> main tidy

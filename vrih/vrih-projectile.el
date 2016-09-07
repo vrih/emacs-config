@@ -1,3 +1,3 @@
 
-(helm-projectile-on)
+;(helm-projectile-on)
 (provide 'vrih-projectile)

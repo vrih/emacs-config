@@ -12,10 +12,8 @@
   '("melpa" . "http://melpa.org/packages/") t)
 
 (add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
-(package-initialize)
-
-(defvar vrih-packages
-  '(flycheck
+                                        ; list the packages you want
+(setq package-list   '(flycheck
     flycheck-ledger
     clj-refactor
     clojure-mode
@@ -55,12 +53,17 @@
     company-restclient
     company-web    
     ;; neotree
+    ))
     
-   ) "A list of packages to ensure are installed at launch.")
+                                        ; activate all the packages (in particular autoloads)
+(package-initialize)
 
-;; http://stackoverflow.com/questions/10092322/how-to-automatically-install-emacs-packages-by-specifyinng-a-list-of-package-name
-(setq url-http-attempt-keepalives nil)
+                                        ; fetch the list of packages available
+(unless package-archive-contents
+  (package-refresh-contents))
 
-(dolist (p vrih-packages)
-  (unless (package-installed-p p)
-    (package-install p)))
+
+(dolist (package package-list)
+  (unless (package-installed-p package)
+        (package-install package)))
+
