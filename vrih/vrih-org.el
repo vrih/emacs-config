@@ -18,7 +18,9 @@
 
  (setq org-capture-templates
       '(("t" "Todo" entry (file+headline "~/Documents/todo.org" "Tasks")
-             "* TODO %?\n  %i")))
+         "* TODO %?\n  %i")
+        ("j" "Journal" entry (file+headline "~/Documents/todo.org" "Work log")
+         "* %T %?\n  %i" :clock-keep :clock-start)))
 
 (define-key global-map "\C-cc" 'org-capture)
 

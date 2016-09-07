@@ -25,6 +25,7 @@
     helm-git
     helm-projectile
     js2-mode
+    git-gutter-mode
     ledger-mode
     leuven-theme
     magit

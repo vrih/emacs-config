@@ -24,8 +24,8 @@
                 (local-set-key (kbd "C-c l") 'pylint)
                 (local-set-key (kbd "C-c o") 'pep8)))
 
-(setq python-shell-virtualenv-path "/home/dan/virtualenvs/python3.5.0")
-(setq pylint-command "/home/dan/virtualenvs/python3.5.0/bin/pylint")
-(setq flycheck-python-pylint-executable "/home/dan/virtualenvs/python3.5.0/bin/pylint")
+(setq python-shell-virtualenv-path "/home/dan/virtualenvs/python2.7.12")
+(setq pylint-command "/home/dan/virtualenvs/python2.7.12/bin/pylint")
+(setq flycheck-python-pylint-executable "/home/dan/virtualenvs/python2.7.12/bin/pylint")
 
 (provide 'vrih-python)
