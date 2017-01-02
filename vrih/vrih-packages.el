@@ -17,6 +17,9 @@
     flycheck-ledger
     clj-refactor
     clojure-mode
+    git-gutter
+    ac-cider
+    ac-nrepl
     cider
     company
     go-mode
@@ -25,7 +28,7 @@
     helm-git
     helm-projectile
     js2-mode
-    git-gutter-mode
+;    git-gutter-mode
     ledger-mode
     leuven-theme
     magit

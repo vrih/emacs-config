@@ -5,7 +5,7 @@
 
 ;(use-package eshell-git-prompt
 ;  :config
-(eshell-git-prompt-use-theme 'powerline)
+;(eshell-git-prompt-use-theme 'powerline)
 ;)
 
 (setq eshell-cmpl-cycle-completions nil)

@@ -3,7 +3,7 @@
 ;(scroll-bar-mode -1)
 
 ;; Load packages
-;(load "~/emacs-config/vrih/vrih-packages.el")
+(load "~/git/emacs-config/vrih/vrih-packages.el")
 
 ;;yasnippet
 <<<<<<< HEAD
