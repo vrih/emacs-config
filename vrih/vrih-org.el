@@ -17,9 +17,9 @@
       '((sequence "BACKLOG" "TODO" "WAITING" "IN PROGRESS" "|" "DONE" "CANCELLED")))
 
  (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/Documents/todo.org" "Tasks")
+      '(("t" "Todo" entry (file+headline "~/Dropbox/Documents/todo.org" "Tasks")
          "* TODO %?\n  %i")
-        ("j" "Journal" entry (file+headline "~/Documents/todo.org" "Work log")
+        ("j" "Journal" entry (file+headline "~/Dropbox/Documents/todo.org" "Work log")
          "* %T %?\n  %i" :clock-keep :clock-start)))
 
 (define-key global-map "\C-cc" 'org-capture)

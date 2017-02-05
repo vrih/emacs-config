@@ -1,20 +1,21 @@
-;(tool-bar-mode -1)
-;(menu-bar-mode -1)
-;(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
 
 ;; Load packages
-(load "~/git/emacs-config/vrih/vrih-packages.el")
+;(load "~/GIT/emacs-config/vrih/vrih-packages.el")
 
 ;;yasnippet
-<<<<<<< HEAD
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (require 'yasnippet)
-(setq yas-snippet-dirs '("~/emacs-config/yasnippets" yas-installed-snippets-dir))
+(setq yas-snippet-dirs '("~/GIT/emacs-config/yasnippets" yas-installed-snippets-dir))
 (yas-global-mode 1)
-=======
-;(require 'yasnippet)
-;(yas-global-mode 1)
-;(setq yas-snippet-dirs '("~/emacs-config/yasnippets" yas-installed-snippets-dir ))
->>>>>>> main tidy
 
 (load-file "~/.emacs_credentials")
 
@@ -54,12 +55,17 @@
      ("payee" "ledger -f %(ledger-file) reg @%(payee)")
      ("account" "ledger -f %(ledger-file) reg %(account)"))) t)
  '(magit-diff-use-overlays nil)
- '(org-agenda-files (quote ("~/Documents/todo.org")))
+ '(org-agenda-files (quote ("~/Dropbox/Documents/todo.org")))
+ '(package-selected-packages
+   (quote
+    (evil-smartparens flycheck-tip evil-mode flycheck-ledger flycheck flycheck-clojure evil gmail-message-mode gmail-mode edit-server-htmlize rust-mode clojure-jump-to-file protobuf-mode midje-mode gist yaml-mode unicode-fonts sql-indent smartparens rainbow-delimiters pretty-symbols powerline org-bullets neotree monokai-theme markdown-mode magit leuven-theme js2-mode helm-projectile helm-git git-gutter edit-server company-web company-restclient company-go company-emoji color-theme-solarized clj-refactor auto-complete-rst ace-flyspell ac-ispell ac-cider)))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
  '(safe-local-variable-values
    (quote
-    ((projectile-project-compilation-cmd . "lein uberjar && scp target/uberjar/tina-standalone.jar d:")
+    ((projectile-project-test-cmd . "lein test && lein with-profile test eastwood")
+     (projectile-project-compilation-cmd . "lein with-profile staging uberjar")
+     (projectile-project-compilation-cmd . "lein uberjar && scp target/uberjar/tina-standalone.jar d:")
      (setq projectile-compilation-command "lein uberjar && scp target/uberjar/tina-standalone.jar d:")
      (projectile-project-compilation-cmd . "make html")
      (epa-file-encrypt-to daniel\.bowtell@infectiousmedia\.com))))
@@ -579,7 +585,7 @@
 (global-set-key "\M-/" 'hippie-expand)
 
 ;; org mode
-(add-to-list 'load-path (concat (getenv "HOME") "/emacs-config/vrih"))
+(add-to-list 'load-path (concat (getenv "HOME") "/GIT/emacs-config/vrih"))
 
 (setq vrih-pkg-full
       '(vrih-org
@@ -590,12 +596,9 @@
         vrih-js
         vrih-helm
         vrih-ledger
-<<<<<<< Updated upstream
-=======
         vrih-clojure
-                                        ;        vrih-mu4e
->>>>>>> Stashed changes
         vrih-projectile
+        vrih-smartparens
         vrih-eshell
         vrih-mouse
         vrih-ido
@@ -610,15 +613,12 @@
   (save-excursion
     (shell-command-on-region (mark) (point) "python -m json.tool" (buffer-name) t)))
 
-<<<<<<< Updated upstream
-=======
 (defvar libnotify-program "/usr/bin/notify-send")
 
 (defun notify-send (title message)
   (start-process "notify" " notify"
 		 libnotify-program "--expire-time=4000" title message))
 
->>>>>>> Stashed changes
 ; Markdown
 (setq markdown-command "pandoc -H ~/notes/markdown.css")
 
@@ -661,17 +661,81 @@
 (setq x-select-enable-clipboard t
       x-select-enable-primary t)
 
-<<<<<<< HEAD
 (projectile-global-mode)
 
-
+;;; Mode line config
 (powerline-default-theme)
+
+(setq mode-line-position
+      '((line-number-mode ("%l" (column-number-mode ":%c")))))
+
+(setq default-mode-line-format
+      '("%e"
+        mode-line-position))
+(defun shorten-directory (dir max-length)
+  "Show up to `max-length' characters of a directory name `dir'."
+  (let ((path (reverse (split-string (abbreviate-file-name dir) "/")))
+               (output ""))
+       (when (and path (equal "" (car path)))
+         (setq path (cdr path)))
+       (while (and path (< (length output) (- max-length 4)))
+         (setq output (concat (car path) "/" output))
+         (setq path (cdr path)))
+       (when path
+         (setq output (concat ".../" output)))
+       output))
+
+(defvar mode-line-directory
+  '(:propertize
+    (:eval (if (buffer-file-name) (concat " " (shorten-directory default-directory 20)) " "))
+                face mode-line-directory)
+  "Formats the current directory.")
+(put 'mode-line-directory 'risky-local-variable t)
+
+(setq-default mode-line-buffer-identification
+  (propertized-buffer-identification "%b "))
+
+;; change definition of vc-mode-line
+;; (defadvice vc-mode-line (after strip-backend () activate)
+;;   (when (stringp vc-mode)
+;;     (let ((gitlogo (replace-regexp-in-string "^ Git." ":" vc-mode)))
+;;       (setq vc-mode gitlogo))))
+
+(defun replace-git-with-logo (orig-func &rest args)
+  (when (stringp vc-mode)
+    (let ((gitlogo (replace-regexp-in-string "Git" "" vc-mode)))
+      (setq vc-mode gitlogo))))
+
+(advice-add 'vc-mode-line :after #'replace-git-with-logo)
+
+(setq-default mode-line-format
+      '("%e"
+        mode-line-front-space
+        ;; mode-line-mule-info -- I'm always on utf-8
+        mode-line-client
+        mode-line-modified
+        ;; mode-line-remote -- no need to indicate this specially
+        ;; mode-line-frame-identification -- this is for text-mode emacs only
+        " "
+        mode-line-directory
+        mode-line-buffer-identification
+        " "
+        mode-line-position
+
+        (vc-mode vc-mode)
+
+        ;;(vc-mode vc-mode)  -- I use magit, not vc-mode
+        (flycheck-mode flycheck-mode-line)
+        " "
+        mode-line-modes
+        mode-line-misc-info
+        mode-line-end-spaces))
+;;; End mde line config
+
 
 (require 'edit-server)
 (edit-server-start)
 
-=======
->>>>>>> main tidy
 ;;; temporary holding for date transposer
 (defun my-date-transposition ()
   (interactive)
@@ -680,30 +744,11 @@
                            (match-string 2) "/"
                            (match-string 1)) nil nil)))
 
-(defun vrih-fahr-to-cels (x)
+(defun my-fahr-to-cels (x)
   "Convert fahrenheit to cels"
   (* (- x 32) (/ 5.0 9)))
-<<<<<<< HEAD
-
-
-(setq message-send-mail-function 'message-send-mail-with-sendmail)
-
-
-;; TODO Move to Gnus specific file
-(setq gnus-thread-sort-functions
-      '((not gnus-thread-sort-by-number)
-        gnus-thread-sort-by-score))
 
 (setq browse-url-generic-program "google-chrome-stable" )
-<<<<<<< Updated upstream
-=======
->>>>>>> main tidy
-=======
-
-(global-set-key [f9] 'sr-speedbar-toggle)
-(require 'sr-speedbar)
-(speedbar-add-supported-extension ".clj")
-
 
 (global-set-key [remap dabbrev-expand] 'hippie-expand)
 
@@ -712,7 +757,39 @@
     '(add-to-list 'edit-server-url-major-mode-alist
                   '("inbox\\.google\\." . gmail-message-edit-server-mode)))
 
-(require 'persistent-soft)
+;(require 'persistent-soft)
 (require 'unicode-fonts)
 (unicode-fonts-setup)
->>>>>>> Stashed changes
+
+(defun my-dec-to-ip (dec)
+  "Convert decimal value to ip"
+  (if (> dec 255)
+      (concat
+       (dec-to-ip (ash dec -8))
+       "."
+       (number-to-string (logand dec 255)))
+    (number-to-string (logand dec 255))))
+
+
+;; ace jump mode
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+
+(add-hook 'emacs-lisp-mode-hook
+          (lambda () (progn '(
+                              (rainbow-delimiters-mode)
+                              (smartparens-mode)
+                              ))))
+          
+
+(evil-mode 1)
+(add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
+
+
+;; stop tramp hanging
+(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
+
+(message  (print
+           mode-line-modes))
+
+
+

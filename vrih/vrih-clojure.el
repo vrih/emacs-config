@@ -9,6 +9,15 @@
 
 (add-hook 'clojure-mode-hook #'my-clojure-mode-hook)
 
+(require 'midje-mode)
+(add-hook 'clojure-mode-hook 'midje-mode)
+(eval-after-load "midje-mode"
+  '(progn
+     (define-key midje-mode-map (kbd "C-c p") nil)
+     (define-key midje-mode-map (kbd "C-c m p") 'midje-previous-fact)
+  ))
+
+(require 'clojure-jump-to-file)
 
 (require 'ac-cider)
 (add-hook 'cider-mode-hook 'ac-flyspell-workaround)
@@ -37,11 +46,11 @@
 (ac-config-default)
 
 ;; ac-nrepl (Auto-complete for the nREPL)
-(require 'ac-nrepl)
-(add-hook 'cider-mode-hook 'ac-nrepl-setup)
-(add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
-(add-to-list 'ac-modes 'cider-mode)
-(add-to-list 'ac-modes 'cider-repl-mode)
+;(require 'ac-nrepl)
+;(add-hook 'cider-mode-hook 'ac-nrepl-setup)
+;(add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
+;(add-to-list 'ac-modes 'cider-mode)
+;(add-to-list 'ac-modes 'cider-repl-mode)
 
 ;; Poping-up contextual documentation
 (eval-after-load "cider"
