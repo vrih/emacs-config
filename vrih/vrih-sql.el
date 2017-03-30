@@ -69,4 +69,8 @@
             (setq sql-alternate-buffer-name (sql-make-smart-buffer-name))
             (sql-rename-buffer)))
 
+
+(use-package sql-indent
+  :ensure t)
+
 (provide 'vrih-sql)

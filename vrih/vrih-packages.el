@@ -18,52 +18,32 @@
 (add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
                                         ; list the packages you want
 (defvar package-list '(flycheck
-                       clj-refactor
-                       clojure-mode
-                       git-gutter
-                       ac-cider
-                                        ;    ac-nrepl
-                       cider
+                       use-package
                        company
                        go-mode
                        edit-server-htmlize
                        gmail-message-mode
-                       gist
                        color-theme
                        helm
                        helm-git
-                       helm-projectile
                        js2-mode
-                                        ;    git-gutter-mode
-                       leuven-theme
-                       magit
                        markdown-mode
                        monokai-theme
                        neotree
-                       org
-                       org-bullets
                        paredit
                        pretty-symbols
                        projectile
-                       rainbow-delimiters
-                       smartparens
-                       sql-indent
                        yaml-mode
                        ac-ispell
                                         ;    ac-python
                        ace-flyspell
                        ace-jump-mode
                        auto-complete-rst
-                                        ;    clj-refactor-mode
                        company-emoji
                        company-go
                        company-restclient
                        company-web
-                       midje-mode ;; clojure test mode
-                       protobuf-mode
                        rust-mode
-                       evil
-                       evil-smartparens
                        flycheck-tip))
                                             ; activate all the packages (in particular autoloads)
 (package-initialize)

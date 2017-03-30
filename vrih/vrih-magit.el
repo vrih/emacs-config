@@ -1,7 +1,12 @@
+(use-package magit
+  :bind (("C-x g" . magit-status))
+  :ensure t)
 
-(global-set-key (kbd "C-x g") 'magit-status)
+(use-package git-gutter
+  :ensure t
+  :config (global-git-gutter-mode))
 
-;(require 'git-gutter)
-;(global-git-gutter-mode +1)
+(use-package gist
+  :ensure t)
 
 (provide 'vrih-magit)

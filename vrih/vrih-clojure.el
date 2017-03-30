@@ -1,40 +1,43 @@
-;(require 'clj-refactor)
+(use-package clojure-mode
+  :ensure t
+  :config (yas-minor-mode 1))
 
-(defun my-clojure-mode-hook ()
-;    (clj-refactor-mode 1)
-    (yas-minor-mode 1) ; for adding require/use/import statements
-    ;; This choice of keybinding leaves cider-macroexpand-1 unbound
-                                        ;    (cljr-add-keybindings-with-prefix "C-c C-m")
-    )
+(use-package midje-mode
+  :init (add-hook 'clojure-mode 'midje-mode)
+  :bind (:midje-mode-map
+         ("C-c p" . nil)
+         ("C-c m p" . midje-previous-fact))
+  :ensure t)
 
-(add-hook 'clojure-mode-hook #'my-clojure-mode-hook)
 
-(require 'midje-mode)
-(add-hook 'clojure-mode-hook 'midje-mode)
-(eval-after-load "midje-mode"
-  '(progn
-     (define-key midje-mode-map (kbd "C-c p") nil)
-     (define-key midje-mode-map (kbd "C-c m p") 'midje-previous-fact)
-  ))
+(use-package clj-refactor
+  :ensure t)
+
+(use-package cider
+  :bind (:cider-mode-map ("C-c C-d" . ac-nrepl-popup-doc))
+  :ensure t)
+
+(use-package ac-cider
+  :commands (ac-flyspell-workaround ac-cider-setup)
+  :init (add-hook 'cider-mode-hook 'ac-flycheck-workaround)
+  (add-hook 'cider-mode-hook 'ac-cider-setup)
+  (add-hook 'cider-repl-mode-hook 'ac-cider-setup)
+  :ensure t)
+
+                                        ;(require 'clj-refactor)
 
 (require 'clojure-jump-to-file)
 
 (require 'ac-cider)
-(add-hook 'cider-mode-hook 'ac-flyspell-workaround)
-(add-hook 'cider-mode-hook 'ac-cider-setup)
-(add-hook 'cider-repl-mode-hook 'ac-cider-setup)
 (eval-after-load "auto-complete"
   '(progn
      (add-to-list 'ac-modes 'cider-mode)
      (add-to-list 'ac-modes 'cider-repl-mode)))
-(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 
-(add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'clojure-mode-hook #'eldoc-mode)
 
 (add-hook 'clojure-mode-hook (lambda ()
                                (setq compile-command "lein uberjar")))
-
 
 (add-to-list 'same-window-buffer-names "<em>nrepl</em>")
 
@@ -49,14 +52,6 @@
 ;(require 'ac-nrepl)
 ;(add-hook 'cider-mode-hook 'ac-nrepl-setup)
 ;(add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
-;(add-to-list 'ac-modes 'cider-mode)
-;(add-to-list 'ac-modes 'cider-repl-mode)
-
-;; Poping-up contextual documentation
-(eval-after-load "cider"
-  '(define-key cider-mode-map (kbd "C-c C-d") 'ac-nrepl-popup-doc))
-
-
 
 
 (provide 'vrih-clojure)

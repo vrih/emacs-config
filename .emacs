@@ -13,12 +13,12 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
-(require 'yasnippet)
-(setq yas-snippet-dirs '("~/GIT/emacs-config/yasnippets" yas-installed-snippets-dir))
-(yas-global-mode 1)
+(use-package yasnippet
+  :init (setq yas-snippet-dirs '("~/GIT/emacs-config/yasnippets" yas-installed-snippets-dir))
+  (yas-global-mode 1)
+  :ensure t)
 
 (load-file "~/.emacs_credentials")
-
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -58,12 +58,13 @@
  '(org-agenda-files (quote ("~/Dropbox/Documents/todo.org")))
  '(package-selected-packages
    (quote
-    (evil-smartparens flycheck-tip evil-mode flycheck-ledger flycheck flycheck-clojure evil gmail-message-mode gmail-mode edit-server-htmlize rust-mode clojure-jump-to-file protobuf-mode midje-mode gist yaml-mode unicode-fonts sql-indent smartparens rainbow-delimiters pretty-symbols powerline org-bullets neotree monokai-theme markdown-mode magit leuven-theme js2-mode helm-projectile helm-git git-gutter edit-server company-web company-restclient company-go company-emoji color-theme-solarized clj-refactor auto-complete-rst ace-flyspell ac-ispell ac-cider)))
+    (unicode-fonts--instructions ag coffee-mode sphinx-mode helm-ag evil-leader use-package evil-smartparens flycheck-tip evil-mode flycheck-ledger flycheck flycheck-clojure evil gmail-message-mode gmail-mode edit-server-htmlize rust-mode clojure-jump-to-file protobuf-mode midje-mode gist yaml-mode unicode-fonts sql-indent smartparens rainbow-delimiters pretty-symbols powerline org-bullets neotree monokai-theme markdown-mode magit leuven-theme js2-mode helm-projectile helm-git git-gutter edit-server company-web company-restclient company-go company-emoji color-theme-solarized clj-refactor auto-complete-rst ace-flyspell ac-ispell ac-cider)))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
  '(safe-local-variable-values
    (quote
-    ((projectile-project-test-cmd . "lein test && lein with-profile test eastwood")
+    ((projectile-project-test-cmd . "lein do test, lein with-profile test eastwood")
+     (projectile-project-test-cmd . "lein test && lein with-profile test eastwood")
      (projectile-project-compilation-cmd . "lein with-profile staging uberjar")
      (projectile-project-compilation-cmd . "lein uberjar && scp target/uberjar/tina-standalone.jar d:")
      (setq projectile-compilation-command "lein uberjar && scp target/uberjar/tina-standalone.jar d:")
@@ -591,14 +592,9 @@
       '(vrih-org
         vrih-sql
         vrih-harvest
-        vrih-magit
         vrih-python
         vrih-js
-        vrih-helm
         vrih-ledger
-        vrih-clojure
-        vrih-projectile
-        vrih-smartparens
         vrih-eshell
         vrih-mouse
         vrih-ido
@@ -606,6 +602,19 @@
 
 (dolist (file vrih-pkg-full)
   (require file))
+
+
+(setq vrih-pkg-files
+      '("vrih-clojure.el"
+        "vrih-helm.el"
+        "vrih-magit.el"
+        "vrih-smartparens.el"
+        "vrih-evil.el"
+        "vrih-projectile.el")
+      )
+
+(dolist (file vrih-pkg-files)
+  (load file))
 
 ;;pretty print json
 (defun json-format ()
@@ -620,7 +629,7 @@
 		 libnotify-program "--expire-time=4000" title message))
 
 ; Markdown
-(setq markdown-command "pandoc -H ~/notes/markdown.css")
+(setq markdown-command "pandoc")
 
 
 ;;; Lisp (SLIME) interaction
@@ -733,8 +742,9 @@
 ;;; End mde line config
 
 
-(require 'edit-server)
-(edit-server-start)
+(use-package edit-server
+  :init (edit-server-start)
+  :ensure t)
 
 ;;; temporary holding for date transposer
 (defun my-date-transposition ()
@@ -758,14 +768,15 @@
                   '("inbox\\.google\\." . gmail-message-edit-server-mode)))
 
 ;(require 'persistent-soft)
-(require 'unicode-fonts)
-(unicode-fonts-setup)
+(use-package unicode-fonts
+  :init (unicode-fonts-setup)
+  :ensure t)
 
 (defun my-dec-to-ip (dec)
   "Convert decimal value to ip"
   (if (> dec 255)
       (concat
-       (dec-to-ip (ash dec -8))
+       (my-dec-to-ip (ash dec -8))
        "."
        (number-to-string (logand dec 255)))
     (number-to-string (logand dec 255))))
@@ -780,16 +791,16 @@
                               (smartparens-mode)
                               ))))
           
-
-(evil-mode 1)
-(add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
-
-
 ;; stop tramp hanging
 (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
 
-(message  (print
-           mode-line-modes))
+(use-package rainbow-delimiters
+  :init (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)
+  :ensure t)
 
 
+(use-package sphinx-mode
+  :ensure t)
 
+(server-start)
