@@ -2,9 +2,10 @@
   :init
   (setq org-agenda-archives-mode nil)
   (setq org-agenda-skip-comment-trees nil)
+  (setq org-src-tab-acts-natively t)
   (setq org-refile-use-outline-path t)
   (setq org-todo-keywords
-        '((sequence "BACKLOG" "TODO" "WAITING" "IN PROGRESS" "|" "DONE" "CANCELLED")))
+        '((sequence "☐" "WAITING" "⬛" "|" "☑" "CANCELLED")))
   (setq org-refile-targets (quote ((nil :maxlevel . 9)
                                    (org-agenda-files :maxlevel . 9))))
   (setq org-src-fontify-natively t); syntax highlighting
@@ -25,6 +26,9 @@
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((plantuml . t)
+     (sh . t)
+     (dot . t)
+     (python . t)
      (sql . t))))
 
 (use-package org-bullets

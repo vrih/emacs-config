@@ -2,6 +2,11 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 
+(defun my-buffer-face-mode-variable ()
+   "Set font to a variable width (proportional) fonts in current buffer"
+   (interactive)
+   (setq buffer-face-mode-face '(:family "Noto Sans" :height 120 :width semi-condensed))
+   (buffer-face-mode))
 ;; Load packages
 ;(load "~/GIT/emacs-config/vrih/vrih-packages.el")
 
@@ -17,6 +22,10 @@
   :init (setq yas-snippet-dirs '("~/GIT/emacs-config/yasnippets" yas-installed-snippets-dir))
   (yas-global-mode 1)
   :ensure t)
+
+(use-package go-snippets
+  :ensure t)
+
 
 (load-file "~/.emacs_credentials")
 
@@ -55,10 +64,11 @@
      ("payee" "ledger -f %(ledger-file) reg @%(payee)")
      ("account" "ledger -f %(ledger-file) reg %(account)"))) t)
  '(magit-diff-use-overlays nil)
+ '(magit-stash-arguments nil)
  '(org-agenda-files (quote ("~/Dropbox/Documents/todo.org")))
  '(package-selected-packages
    (quote
-    (unicode-fonts--instructions ag coffee-mode sphinx-mode helm-ag evil-leader use-package evil-smartparens flycheck-tip evil-mode flycheck-ledger flycheck flycheck-clojure evil gmail-message-mode gmail-mode edit-server-htmlize rust-mode clojure-jump-to-file protobuf-mode midje-mode gist yaml-mode unicode-fonts sql-indent smartparens rainbow-delimiters pretty-symbols powerline org-bullets neotree monokai-theme markdown-mode magit leuven-theme js2-mode helm-projectile helm-git git-gutter edit-server company-web company-restclient company-go company-emoji color-theme-solarized clj-refactor auto-complete-rst ace-flyspell ac-ispell ac-cider)))
+    (flymd flycheck-mypy scala-mode adoc-mode flycheck-haskell flymake-haskell-multi haskell-mode haskell-snippets web-mode htmlize autopair ace-jump-mode org-gnus helm-notmuch notmuch org-mime bbdb visual-fill-column mu4e-multi mu4e go-snippets go-snippet unicode-fonts--instructions ag coffee-mode helm-ag evil-leader use-package evil-smartparens flycheck-tip evil-mode flycheck-ledger flycheck flycheck-clojure evil gmail-message-mode gmail-mode edit-server-htmlize rust-mode clojure-jump-to-file protobuf-mode midje-mode gist yaml-mode unicode-fonts sql-indent smartparens rainbow-delimiters pretty-symbols powerline org-bullets neotree monokai-theme markdown-mode magit leuven-theme js2-mode helm-projectile helm-git git-gutter edit-server company-web company-restclient company-go company-emoji color-theme-solarized clj-refactor auto-complete-rst ace-flyspell ac-ispell ac-cider)))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
  '(safe-local-variable-values
@@ -598,6 +608,8 @@
         vrih-eshell
         vrih-mouse
         vrih-ido
+        vrih-markdown
+    ;    vrih-mu4e
         vrih-packages))
 
 (dolist (file vrih-pkg-full)
@@ -627,9 +639,6 @@
 (defun notify-send (title message)
   (start-process "notify" " notify"
 		 libnotify-program "--expire-time=4000" title message))
-
-; Markdown
-(setq markdown-command "pandoc")
 
 
 ;;; Lisp (SLIME) interaction
@@ -800,7 +809,127 @@
   :ensure t)
 
 
-(use-package sphinx-mode
+(add-hook 'mail-mode-hook 'turn-on-visual-line-mode)
+(server-start)
+(add-hook 'rst-mode-hook 'my-buffer-face-mode-variable)
+(add-hook 'rst-mode-hook 'turn-on-auto-fill)
+;(add-hook 'rst-mode-hook 'flyspell-mode-on)
+
+(add-hook 'org-mode-hook 'my-buffer-face-mode-variable)
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
+;(add-hook 'org-mode-hook 'flyspell-mode-on)
+
+(add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
+
+(add-hook 'mail-mode-hook 'my-buffer-face-mode-variable)
+;(add-hook 'mail-mode-hook 'flyspell-mode-on)
+
+(require 'bbdb)
+
+;; initialization
+(bbdb-initialize 'gnus 'message)
+(bbdb-mua-auto-update-init 'gnus 'message)
+
+;; size of the bbdb popup
+(setq bbdb-pop-up-window-size 0.15)
+(setq bbdb-mua-pop-up-window-size 0.15)
+
+;; What do we do when invoking bbdb interactively
+(setq bbdb-mua-update-interactive-p '(query . create))
+
+;; Make sure we look at every address in a message and not only the
+;; first one
+(setq bbdb-message-all-addresses t)
+
+;; use ; on a message to invoke bbdb interactively
+(add-hook
+ 'gnus-summary-mode-hook
+ (lambda ()
+    (define-key gnus-summary-mode-map (kbd ";") 'bbdb-mua-edit-field)))
+
+(use-package hydra
   :ensure t)
 
-(server-start)
+(require 'org-mime)
+(setq org-mime-library 'mml)
+
+
+
+;;; notmuch for gnus
+;; Gnus and notmuch ....
+;; - Sets up searching with notmuch, when looking at the message it's possible
+;; to switch to gnus article view with C-c C-c 
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package notmuch
+  :init  (add-hook 'gnus-group-mode-hook 'lch-notmuch-shortcut)
+  :ensure t)
+
+;(use-package org-gnus
+;  :ensure t)
+
+(defun lch-notmuch-shortcut ()
+  (define-key gnus-group-mode-map "GG" 'notmuch-search)
+  )
+
+(defun notmuch-file-to-group (file)
+  "Calculate the Gnus group name from the given file name."
+
+  (let ((group (file-name-directory (directory-file-name (file-name-directory file)))))
+
+    (if (string-match ".*/Mail/Work" file)
+        (setq group (replace-regexp-in-string ".*/Mail/Work/" "nnimap+Work:Work/" group))
+        )
+    (if (string-match ".*/Mail/Personal" file)
+        (setq group (replace-regexp-in-string ".*/Mail/Personal/" "nnimap+Work:Personal/" group))
+        )
+
+    (setq group (replace-regexp-in-string "/$" "" group))
+    (if (string-match ":$" group)
+        (concat group "INBOX")
+      (replace-regexp-in-string ":\\." ":" group))))
+
+(defun notmuch-goto-message-in-gnus ()
+       "Open a summary buffer containing the current notmuch
+     article."
+       (interactive)
+       (unless (gnus-alive-p) (with-temp-buffer (gnus)))
+       (let ((group (notmuch-file-to-group (notmuch-show-get-filename)))
+     	(message-id
+     	 (replace-regexp-in-string "\"" ""
+     	  (replace-regexp-in-string "^id:" ""
+     				    (notmuch-show-get-message-id)))))
+         (if (and group message-id)
+     	(progn
+     	  (gnus-summary-read-group group 1) ; have to show at least one old message
+     	  (gnus-summary-refer-article message-id)) ; simpler than org-gnus method?
+           (message "Couldn't get relevant infos for switching to Gnus."))))
+
+(define-key notmuch-show-mode-map (kbd "C-c C-c") 'notmuch-goto-message-in-gnus)
+
+(require 'bigquery-mode "~/GIT/emacs-config/bigquery-mode.el")
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (push '("[ ]" .  "☐") prettify-symbols-alist)
+            (push '("[X]" . "☒" ) prettify-symbols-alist)
+            (push '("[-]" . "◫" ) prettify-symbols-alist)
+            (prettify-symbols-mode)
+            ))
+
+(global-prettify-symbols-mode +1)
+
+(setq visual-fill-column 81)
+
+
+
+    ;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph    
+(defun unfill-paragraph (&optional region)
+  "Takes a multi-line paragraph and makes it into a single line of text."
+  (interactive (progn (barf-if-buffer-read-only) '(t)))
+  (let ((fill-column (point-max))
+        ;; This would override `fill-column' if it's an integer.
+        (emacs-lisp-docstring-fill-column t))
+    (fill-paragraph nil region)))
+
+;; Handy key definition
+(define-key global-map "\M-Q" 'unfill-paragraph)

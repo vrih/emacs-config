@@ -1,0 +1,14 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: sql source 
+# key: sql
+# binding: direct-keybinding
+# --
+#+name: $1
+#+header: :engine mysql
+#+header: :dbhost (symbol-value 'pdw-domain)
+#+header: :dbuser (symbol-value 'pdb-sql-user)
+#+header: :dbpassword (symbol-value 'pdb-sql-pass)
+#+header: :database 
+#+BEGIN_SRC sql
+$0
+#+END_SRC

@@ -2,20 +2,20 @@
   :ensure t
   :config (yas-minor-mode 1))
 
-(use-package midje-mode
-  :init (add-hook 'clojure-mode 'midje-mode)
-  :bind (:midje-mode-map
-         ("C-c p" . nil)
-         ("C-c m p" . midje-previous-fact))
-  :ensure t)
+;(use-package midje-mode
+;  :init (add-hook 'clojure-mode 'midje-mode)
+;  :bind (:midje-mode-map
+;         ("C-c p" . nil)
+;         ("C-c m p" . midje-previous-fact))
+;  :ensure t)
 
 
 (use-package clj-refactor
   :ensure t)
 
-(use-package cider
-  :bind (:cider-mode-map ("C-c C-d" . ac-nrepl-popup-doc))
-  :ensure t)
+;(use-package cider
+;  :bind (:cider-mode-map ("C-c C-d" . ac-nrepl-popup-doc))
+;  :ensure t)
 
 (use-package ac-cider
   :commands (ac-flyspell-workaround ac-cider-setup)
