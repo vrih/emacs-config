@@ -34,7 +34,6 @@
     map))
 
 
-
 ;; company backend
 (require 'cl-lib)
 (require 'company)

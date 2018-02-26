@@ -68,7 +68,7 @@
  '(org-agenda-files (quote ("~/Dropbox/Documents/todo.org")))
  '(package-selected-packages
    (quote
-    (flymd flycheck-mypy scala-mode adoc-mode flycheck-haskell flymake-haskell-multi haskell-mode haskell-snippets web-mode htmlize autopair ace-jump-mode org-gnus helm-notmuch notmuch org-mime bbdb visual-fill-column mu4e-multi mu4e go-snippets go-snippet unicode-fonts--instructions ag coffee-mode helm-ag evil-leader use-package evil-smartparens flycheck-tip evil-mode flycheck-ledger flycheck flycheck-clojure evil gmail-message-mode gmail-mode edit-server-htmlize rust-mode clojure-jump-to-file protobuf-mode midje-mode gist yaml-mode unicode-fonts sql-indent smartparens rainbow-delimiters pretty-symbols powerline org-bullets neotree monokai-theme markdown-mode magit leuven-theme js2-mode helm-projectile helm-git git-gutter edit-server company-web company-restclient company-go company-emoji color-theme-solarized clj-refactor auto-complete-rst ace-flyspell ac-ispell ac-cider)))
+    (edit-indirect inf-clojure flymd flycheck-mypy scala-mode adoc-mode flycheck-haskell flymake-haskell-multi haskell-mode haskell-snippets web-mode htmlize autopair ace-jump-mode org-gnus helm-notmuch notmuch org-mime bbdb visual-fill-column mu4e-multi mu4e go-snippets go-snippet unicode-fonts--instructions ag coffee-mode helm-ag evil-leader use-package evil-smartparens flycheck-tip evil-mode flycheck-ledger flycheck flycheck-clojure evil gmail-message-mode gmail-mode edit-server-htmlize rust-mode clojure-jump-to-file protobuf-mode midje-mode gist yaml-mode unicode-fonts sql-indent smartparens rainbow-delimiters pretty-symbols powerline org-bullets neotree monokai-theme markdown-mode magit leuven-theme js2-mode helm-projectile helm-git git-gutter edit-server company-web company-restclient company-go company-emoji color-theme-solarized clj-refactor auto-complete-rst ace-flyspell ac-ispell ac-cider)))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
  '(safe-local-variable-values
@@ -700,13 +700,13 @@
          (setq output (concat (car path) "/" output))
          (setq path (cdr path)))
        (when path
-         (setq output (concat ".../" output)))
+         (setq output (concat "…/" output)))
        output))
 
 (defvar mode-line-directory
   '(:propertize
     (:eval (if (buffer-file-name) (concat " " (shorten-directory default-directory 20)) " "))
-                face mode-line-directory)
+                face mode-line)
   "Formats the current directory.")
 (put 'mode-line-directory 'risky-local-variable t)
 
@@ -933,3 +933,15 @@
 
 ;; Handy key definition
 (define-key global-map "\M-Q" 'unfill-paragraph)
+
+(add-hook 'rust-mode-hook
+          (lambda ()
+            
+              (push '("->" . ?→) prettify-symbols-alist)
+              (push '("=>" . ?⇒) prettify-symbols-alist)
+              ))
+(defun figwheel-repl ()
+  (interactive)
+  (inf-clojure "lein figwheel"))
+
+(add-hook 'clojure-mode-hook #'inf-clojure-minor-mode)

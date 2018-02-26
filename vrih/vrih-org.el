@@ -5,7 +5,7 @@
   (setq org-src-tab-acts-natively t)
   (setq org-refile-use-outline-path t)
   (setq org-todo-keywords
-        '((sequence "☐" "WAITING" "⬛" "|" "☑" "CANCELLED")))
+        '((sequence "☐" "WAITING" "▣" "|" "☑" "CANCELLED")))
   (setq org-refile-targets (quote ((nil :maxlevel . 9)
                                    (org-agenda-files :maxlevel . 9))))
   (setq org-src-fontify-natively t); syntax highlighting
