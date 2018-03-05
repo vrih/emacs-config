@@ -1,0 +1,15 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: recipe
+# key: recipe
+# binding: direct-keybinding
+# --
+
+# $1
+
+## Ingredients
+
+- 
+
+## Method
+
+1. 
