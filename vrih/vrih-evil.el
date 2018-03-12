@@ -10,3 +10,5 @@
 ;(use-package evil-smartparens
 ;  :ensure t
 ;  :config (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode))
+(provide 'vrih-evil)
+

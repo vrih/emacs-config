@@ -4,6 +4,11 @@
   :mode (("\\.rcl" . restclient-mode)))
 
 (use-package company-restclient
-  :init (add-to-list 'company-backends 'company-restclient)
+  :init (add-hook 'restclient-mode-hook
+                  (lambda ()
+                    (add-to-list (make-local-variable 'company-backends)
+                                 'company-restclient)))
   :ensure t
   )
+
+(provide 'vrih-restclient)

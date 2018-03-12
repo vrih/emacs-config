@@ -13,3 +13,8 @@
 
 (use-package helm-ag
   :ensure t)
+
+(use-package ggtags
+  :ensure t)
+
+(provide 'vrih-projectile)

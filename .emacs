@@ -7,10 +7,6 @@
    (interactive)
    (setq buffer-face-mode-face '(:family "Noto Sans" :height 120 :width semi-condensed))
    (buffer-face-mode))
-;; Load packages
-;(load "~/GIT/emacs-config/vrih/vrih-packages.el")
-
-;;yasnippet
 
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
@@ -25,7 +21,6 @@
 
 (use-package go-snippets
   :ensure t)
-
 
 (load-file "~/.emacs_credentials")
 
@@ -68,7 +63,7 @@
  '(org-agenda-files (quote ("~/Dropbox/Documents/todo.org")))
  '(package-selected-packages
    (quote
-    (elmacro flycheck-rust edit-indirect inf-clojure flymd flycheck-mypy scala-mode adoc-mode flycheck-haskell flymake-haskell-multi haskell-mode haskell-snippets web-mode htmlize autopair ace-jump-mode org-gnus helm-notmuch notmuch org-mime bbdb visual-fill-column mu4e-multi mu4e go-snippets go-snippet unicode-fonts--instructions ag coffee-mode helm-ag evil-leader use-package evil-smartparens flycheck-tip evil-mode flycheck-ledger flycheck flycheck-clojure evil gmail-message-mode gmail-mode edit-server-htmlize rust-mode clojure-jump-to-file protobuf-mode midje-mode gist yaml-mode unicode-fonts sql-indent smartparens rainbow-delimiters pretty-symbols powerline org-bullets neotree monokai-theme markdown-mode magit leuven-theme js2-mode helm-projectile helm-git git-gutter edit-server company-web company-restclient company-go company-emoji color-theme-solarized clj-refactor auto-complete-rst ace-flyspell ac-ispell ac-cider)))
+    (ggtags cargo-mode org-journal cargo elmacro flycheck-rust edit-indirect inf-clojure flymd flycheck-mypy scala-mode adoc-mode flycheck-haskell flymake-haskell-multi haskell-mode haskell-snippets web-mode htmlize autopair ace-jump-mode org-gnus helm-notmuch notmuch org-mime bbdb visual-fill-column mu4e-multi mu4e go-snippets go-snippet unicode-fonts--instructions ag coffee-mode helm-ag evil-leader use-package evil-smartparens flycheck-tip evil-mode flycheck-ledger flycheck flycheck-clojure evil gmail-message-mode gmail-mode edit-server-htmlize rust-mode clojure-jump-to-file protobuf-mode midje-mode gist yaml-mode unicode-fonts sql-indent smartparens rainbow-delimiters pretty-symbols powerline org-bullets neotree monokai-theme markdown-mode magit leuven-theme js2-mode helm-projectile helm-git git-gutter edit-server company-web company-restclient company-go company-emoji color-theme-solarized clj-refactor auto-complete-rst ace-flyspell ac-ispell ac-cider)))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
  '(safe-local-variable-values
@@ -574,6 +569,9 @@
 ;;graphics
 (set-face-attribute 'default nil :font "Source Code Pro" :height 100)
 
+
+(when (member "EmojiOne" (font-family-list))
+  (set-fontset-font t 'unicode "EmojiOne" nil 'prepend))
 ;; Use monkoai theme on graphical systems
 (when (display-graphic-p)
     (load-theme 'monokai t))
@@ -599,7 +597,10 @@
 (add-to-list 'load-path (concat (getenv "HOME") "/GIT/emacs-config/vrih"))
 
 (setq vrih-pkg-full
-      '(vrih-org
+      '(vrih-hydra
+        vrih-org
+        vrih-org-journal
+        vrih-rust
         vrih-sql
         vrih-harvest
         vrih-python
@@ -608,7 +609,10 @@
         vrih-eshell
         vrih-mouse
         vrih-ido
+        vrih-evil
+        vrih-projectile
         vrih-markdown
+        vrih-restclient
     ;    vrih-mu4e
         vrih-packages))
 
@@ -621,8 +625,7 @@
         "vrih-helm.el"
         "vrih-magit.el"
         "vrih-smartparens.el"
-        "vrih-evil.el"
-        "vrih-projectile.el")
+        )
       )
 
 (dolist (file vrih-pkg-files)
@@ -647,7 +650,7 @@
 ;(require 'slime)
 ;(slime-setup)
 
-;; Smartparens
+;; Smartparens?
 ;(require 'smartparens-config)
 
 ;; Pretty symbols

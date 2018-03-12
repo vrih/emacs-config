@@ -35,4 +35,25 @@
   :init (add-hook 'org-mode-hook #'org-bullets-mode)
   :ensure t)
 
+(defhydra hydra-org-clock (:color blue :hint nil)
+   "
+Clock   In/out^     ^Edit^   ^Summary     (_?_)
+-----------------------------------------
+        _i_n         _e_dit   _g_oto entry
+        _c_ontinue   _q_uit   _d_isplay
+        _o_ut        ^ ^      _r_eport
+      "
+   ("i" org-clock-in)
+   ("o" org-clock-out)
+   ("c" org-clock-in-last)
+   ("e" org-clock-modify-effort-estimate)
+   ("q" org-clock-cancel)
+   ("g" org-clock-goto)
+   ("d" org-clock-display)
+   ("r" org-clock-report)
+   ("?" (org-info "Clocking commands")))
+
+(evil-leader/set-key-for-mode 'org-mode "c" 'hydra-org-clock/body)
+
+
 (provide 'vrih-org)
