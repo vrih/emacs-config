@@ -27,8 +27,6 @@
 (defhydra hydra-projectile (:color teal
                             :hint nil)
   "
-     PROJECTILE: %(projectile-project-root)
-
      Find File            Search/Tags          Buffers                Cache
 ------------------------------------------------------------------------------------------
   _f_: file             _a_: ag                _i_: Ibuffer           _c_: cache clear
@@ -49,7 +47,7 @@
   ("s-k" projectile-kill-buffers)
   ("m"   projectile-multi-occur)
   ("o"   projectile-multi-occur)
-  ("p"   projectile-switch-project)
+  ("p"   helm-projectile)
   ("s"   projectile-switch-project)
   ("r"   projectile-recentf)
   ("x"   projectile-remove-known-project)

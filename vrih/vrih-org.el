@@ -19,7 +19,8 @@
           ("j" "Journal" entry (file+headline "~/Dropbox/Documents/todo.org" "Work log")
            "* %T %?\n  %i" :clock-keep :clock-start)))
   (setq org-outline-path-complete-in-steps nil)
-  :bind (("C-c c" . org-capture)
+  (add-hook 'org-mode-hook 'flyspell-mode)
+            :bind (("C-c c" . org-capture)
          ("C-x a" . org-agenda-list))
   :ensure t
   :config

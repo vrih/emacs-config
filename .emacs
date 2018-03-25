@@ -22,8 +22,6 @@
 (use-package go-snippets
   :ensure t)
 
-(load-file "~/.emacs_credentials")
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -63,7 +61,7 @@
  '(org-agenda-files (quote ("~/Dropbox/Documents/todo.org")))
  '(package-selected-packages
    (quote
-    (ggtags cargo-mode org-journal cargo elmacro flycheck-rust edit-indirect inf-clojure flymd flycheck-mypy scala-mode adoc-mode flycheck-haskell flymake-haskell-multi haskell-mode haskell-snippets web-mode htmlize autopair ace-jump-mode org-gnus helm-notmuch notmuch org-mime bbdb visual-fill-column mu4e-multi mu4e go-snippets go-snippet unicode-fonts--instructions ag coffee-mode helm-ag evil-leader use-package evil-smartparens flycheck-tip evil-mode flycheck-ledger flycheck flycheck-clojure evil gmail-message-mode gmail-mode edit-server-htmlize rust-mode clojure-jump-to-file protobuf-mode midje-mode gist yaml-mode unicode-fonts sql-indent smartparens rainbow-delimiters pretty-symbols powerline org-bullets neotree monokai-theme markdown-mode magit leuven-theme js2-mode helm-projectile helm-git git-gutter edit-server company-web company-restclient company-go company-emoji color-theme-solarized clj-refactor auto-complete-rst ace-flyspell ac-ispell ac-cider)))
+    (go-complete inf-ruby ggtags cargo-mode org-journal cargo elmacro flycheck-rust edit-indirect inf-clojure flymd flycheck-mypy scala-mode adoc-mode flycheck-haskell flymake-haskell-multi haskell-mode haskell-snippets web-mode htmlize autopair ace-jump-mode org-gnus helm-notmuch notmuch org-mime bbdb visual-fill-column mu4e-multi mu4e go-snippets go-snippet unicode-fonts--instructions ag coffee-mode helm-ag evil-leader use-package evil-smartparens flycheck-tip evil-mode flycheck-ledger flycheck flycheck-clojure evil gmail-message-mode gmail-mode edit-server-htmlize rust-mode clojure-jump-to-file protobuf-mode midje-mode gist yaml-mode unicode-fonts sql-indent smartparens rainbow-delimiters pretty-symbols powerline org-bullets neotree monokai-theme markdown-mode magit leuven-theme js2-mode helm-projectile helm-git git-gutter edit-server company-web company-restclient company-go company-emoji color-theme-solarized clj-refactor auto-complete-rst ace-flyspell ac-ispell ac-cider)))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
  '(safe-local-variable-values
@@ -613,7 +611,8 @@
         vrih-projectile
         vrih-markdown
         vrih-restclient
-    ;    vrih-mu4e
+                                        ;    vrih-mu4e
+        vrih-ruby
         vrih-packages))
 
 (dolist (file vrih-pkg-full)
@@ -947,3 +946,13 @@
   (inf-clojure "lein figwheel"))
 
 (add-hook 'clojure-mode-hook #'inf-clojure-minor-mode)
+
+
+(defun beta-to-prod (start end)
+  (interactive "r")
+  (replace-string "-beta" "" nil start end)
+  (replace-string "BETA" "PROD" nil start end)
+  (replace-string "YmV0YUNleW1aNlZzTWdzUnhpVXpRUTRoOng=" "Q2V5bVo2VnNNZ3NSeGlVelFRNGg6eA==" nil start end))
+
+(add-to-list 'safe-local-variable-values
+             '(markdown-command . "pandoc -c /home/daniel/Dropbox/Documents/self-serve/release-notes/pandoc.css -f markdown -t html5 --mathjax --highlight-style pygments --standalone"))
