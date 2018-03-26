@@ -1,4 +1,5 @@
-(require 'smartparens-config)
+;(use-package smartparens-config
+;  :ensure t)
 
 (use-package smartparens
   :bind (:map sp-keymap 

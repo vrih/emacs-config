@@ -26,7 +26,7 @@
 
                                         ;(require 'clj-refactor)
 
-(require 'clojure-jump-to-file)
+;(require 'clojure-jump-to-file)
 
 (require 'ac-cider)
 (eval-after-load "auto-complete"
