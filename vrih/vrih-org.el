@@ -4,6 +4,10 @@
   (setq org-agenda-skip-comment-trees nil)
   (setq org-src-tab-acts-natively t)
   (setq org-refile-use-outline-path t)
+
+  (setq org-html-html5-fancy t)
+  (setq org-html-checkbox-type 'unicode)
+  (setq org-html-use-unicode-chars t)
   (setq org-todo-keywords
         '((sequence "☐" "WAITING" "▣" "|" "☑" "CANCELLED")))
   (setq org-refile-targets (quote ((nil :maxlevel . 9)
@@ -34,6 +38,9 @@
 
 (use-package org-bullets
   :init (add-hook 'org-mode-hook #'org-bullets-mode)
+  :ensure t)
+
+(use-package org-beautify-theme
   :ensure t)
 
 (defhydra hydra-org-clock (:color blue :hint nil)
