@@ -19,9 +19,6 @@
   (yas-global-mode 1)
   :ensure t)
 
-(use-package go-snippets
-  :ensure t)
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -826,34 +823,34 @@
 (add-hook 'mail-mode-hook 'my-buffer-face-mode-variable)
 ;(add-hook 'mail-mode-hook 'flyspell-mode-on)
 
-(require 'bbdb)
+;(require 'bbdb)
 
 ;; initialization
-(bbdb-initialize 'gnus 'message)
-(bbdb-mua-auto-update-init 'gnus 'message)
+;(bbdb-initialize 'gnus 'message)
+;(bbdb-mua-auto-update-init 'gnus 'message)
 
 ;; size of the bbdb popup
-(setq bbdb-pop-up-window-size 0.15)
-(setq bbdb-mua-pop-up-window-size 0.15)
+;(setq bbdb-pop-up-window-size 0.15)
+;(setq bbdb-mua-pop-up-window-size 0.15)
 
 ;; What do we do when invoking bbdb interactively
-(setq bbdb-mua-update-interactive-p '(query . create))
+;(setq bbdb-mua-update-interactive-p '(query . create))
 
 ;; Make sure we look at every address in a message and not only the
 ;; first one
-(setq bbdb-message-all-addresses t)
+;(setq bbdb-message-all-addresses t)
 
 ;; use ; on a message to invoke bbdb interactively
-(add-hook
- 'gnus-summary-mode-hook
- (lambda ()
-    (define-key gnus-summary-mode-map (kbd ";") 'bbdb-mua-edit-field)))
+;(add-hook
+; 'gnus-summary-mode-hook
+; (lambda ()
+;    (define-key gnus-summary-mode-map (kbd ";") 'bbdb-mua-edit-field)))
 
 (use-package hydra
   :ensure t)
 
-(require 'org-mime)
-(setq org-mime-library 'mml)
+;; (require 'org-mime)
+;; (setq org-mime-library 'mml)
 
 
 
@@ -908,7 +905,7 @@
 
 (define-key notmuch-show-mode-map (kbd "C-c C-c") 'notmuch-goto-message-in-gnus)
 
-(require 'bigquery-mode "~/GIT/emacs-config/bigquery-mode.el")
+;(require 'bigquery-mode "~/GIT/emacs-config/bigquery-mode.el")
 
 (add-hook 'org-mode-hook
           (lambda ()
