@@ -10,6 +10,8 @@
           (lambda () (flycheck-mode t)))
 
 (use-package json-mode
-  :ensure t)
+  :ensure t
+  :init (setq json-reformat:indent-width 2))
 
 (provide 'vrih-js)
+
