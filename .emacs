@@ -610,6 +610,7 @@
         vrih-restclient
                                         ;    vrih-mu4e
         vrih-ruby
+        vrih-vue
         vrih-packages))
 
 (dolist (file vrih-pkg-full)

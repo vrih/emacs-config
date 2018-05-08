@@ -9,4 +9,7 @@
 (add-hook 'js-mode-hook 
           (lambda () (flycheck-mode t)))
 
+(use-package json-mode
+  :ensure t)
+
 (provide 'vrih-js)
