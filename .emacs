@@ -63,7 +63,9 @@
  '(pos-tip-foreground-color "#272822")
  '(safe-local-variable-values
    (quote
-    ((projectile-project-test-cmd . "lein do test, lein with-profile test eastwood")
+    ((projectile-test-cmd . "yarn test")
+     (markdown-command . "pandoc -c /home/daniel/Dropbox/Documents/self-serve/release-notes/pandoc.css -f markdown -t html5 --mathjax --highlight-style pygments --standalone")
+     (projectile-project-test-cmd . "lein do test, lein with-profile test eastwood")
      (projectile-project-test-cmd . "lein test && lein with-profile test eastwood")
      (projectile-project-compilation-cmd . "lein with-profile staging uberjar")
      (projectile-project-compilation-cmd . "lein uberjar && scp target/uberjar/tina-standalone.jar d:")
@@ -589,7 +591,7 @@
 (global-set-key "\M-/" 'hippie-expand)
 
 ;; org mode
-(add-to-list 'load-path (concat (getenv "HOME") "/GIT/emacs-config/vrih"))
+(add-to-list 'load-path (concat (getenv "HOME") "/emacs-config/vrih"))
 
 (setq vrih-pkg-full
       '(vrih-hydra
@@ -683,7 +685,7 @@
 (projectile-global-mode)
 
 ;;; Mode line config
-(powerline-default-theme)
+;(powerline-default-theme)
 
 (setq mode-line-position
       '((line-number-mode ("%l" (column-number-mode ":%c")))))
@@ -960,3 +962,7 @@
   :ensure t
   :config
   (editorconfig-mode 1))
+
+(use-package go-autocomplete
+  :ensure t
+  :init (ac-config-default))

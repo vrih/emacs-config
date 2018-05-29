@@ -24,16 +24,18 @@
 (defhydra hydra-ruby (:color blue :hint nil)
 "    Navigate            Test               Lint                    Rake
  ─────────────────────────────────────────────────────────────────────────────────
-    t toggle code/spec  s  test one spec   r rubocop auto correct   R rake
-                        f  test file                                
+    t toggle code/spec  s  test one spec   r rubocop auto correct   C rake
+    T rake console      f  test file       R rubocop check project                         
                         a  test all specs
                 "
    ("t" rspec-toggle-spec-and-target)
+   ("T" inf-ruby-console-auto)
    ("s" rspec-verify-single)
    ("f" rspec-verify)
    ("a" rspec-verify-all)
    ("r" (lambda nil (interactive)(rubocop-autocorrect-current-file)(revert-buffer nil 1)))
-   ("R" rake))
+   ("R" rubocop-check-project)
+   ("C" (lambda nil (interactive)(rspec-verify-all)(rubocop-check-project))))
 
 (evil-leader/set-key-for-mode 'ruby-mode "c" 'hydra-ruby/body)
 (provide 'vrih-ruby)

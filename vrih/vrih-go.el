@@ -6,4 +6,5 @@
           ; requires gocode
 (use-package go-complete
   :ensure t
-  :init (add-hook 'completion-at-point-functions 'go-complete-at-point))
+  :init (add-hook 'completion-at-point-functions 'go-complete-at-point)
+  (setq ac-go-gocode-bin "/home/dan/go/bin/gocode"))
