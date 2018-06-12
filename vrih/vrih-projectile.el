@@ -1,3 +1,5 @@
+(projectile-global-mode)
+
 (use-package helm-projectile
   :commands (helm-projectile helm-projectile-switch-project)
   :bind (("C-c p p" . helm-projectile)
@@ -10,7 +12,12 @@
     "ps" 'helm-projectile-ag
     "pa" 'helm-projectile-find-file-in-known-projects))
 
-
+(projectile-register-project-type 'yarn '("package.json")
+				  :compile "yarn build"
+				  :test "yarn test"
+				  :run "yarn dev"
+				  :test-suffix ".spec"
+                                  :test-dir "test/")
 (use-package helm-ag
   :ensure t)
 

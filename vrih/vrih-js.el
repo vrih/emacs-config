@@ -7,7 +7,9 @@
 (setq js2-highlight-level 3)
 
 (add-hook 'js-mode-hook 
-          (lambda () (flycheck-mode t)))
+          (lambda () (flycheck-mode t)
+            (setq tab-width 2)))
+
 
 (use-package json-mode
   :ensure t

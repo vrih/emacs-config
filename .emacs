@@ -53,6 +53,7 @@
      ("reg" "ledger -f %(ledger-file) reg")
      ("payee" "ledger -f %(ledger-file) reg @%(payee)")
      ("account" "ledger -f %(ledger-file) reg %(account)"))) t)
+ '(magit-diff-section-arguments (quote ("--no-ext-diff")))
  '(magit-diff-use-overlays nil)
  '(magit-stash-arguments nil)
  '(org-agenda-files (quote ("~/Dropbox/Documents/todo.org")))
@@ -682,8 +683,6 @@
 (setq x-select-enable-clipboard t
       x-select-enable-primary t)
 
-(projectile-global-mode)
-
 ;;; Mode line config
 ;(powerline-default-theme)
 
@@ -920,8 +919,12 @@
 
 (global-prettify-symbols-mode +1)
 
-(setq visual-fill-column 81)
-
+(use-package visual-fill-column
+  :ensure t
+  :defer t
+  :config (setq-default visual-fill-column-center-text t
+                        visual-column-fringes-outside-margins nil
+                        visual-fill-column-width 100))
 
 
     ;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph    
@@ -966,3 +969,11 @@
 (use-package go-autocomplete
   :ensure t
   :init (ac-config-default))
+
+(use-package multiple-cursors
+  :ensure t)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
