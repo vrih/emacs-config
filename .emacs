@@ -59,7 +59,7 @@
  '(org-agenda-files (quote ("~/Dropbox/Documents/todo.org")))
  '(package-selected-packages
    (quote
-    (vue-mode vue-html-mode json-mode editorconfig projectile-rails rspec-mode rubocop org-beautify-theme org-pretty-table org go-complete inf-ruby ggtags cargo-mode org-journal cargo elmacro flycheck-rust edit-indirect inf-clojure flymd flycheck-mypy scala-mode adoc-mode flycheck-haskell flymake-haskell-multi haskell-mode haskell-snippets web-mode htmlize autopair ace-jump-mode org-gnus helm-notmuch notmuch org-mime bbdb visual-fill-column mu4e-multi mu4e go-snippets go-snippet unicode-fonts--instructions ag coffee-mode helm-ag evil-leader use-package evil-smartparens flycheck-tip evil-mode flycheck-ledger flycheck flycheck-clojure evil gmail-message-mode gmail-mode edit-server-htmlize rust-mode clojure-jump-to-file protobuf-mode midje-mode gist yaml-mode unicode-fonts sql-indent smartparens rainbow-delimiters pretty-symbols powerline org-bullets neotree monokai-theme markdown-mode magit leuven-theme js2-mode helm-projectile helm-git git-gutter edit-server company-web company-restclient company-go company-emoji color-theme-solarized clj-refactor auto-complete-rst ace-flyspell ac-ispell ac-cider)))
+    (evil-mc vue-mode vue-html-mode json-mode editorconfig projectile-rails rspec-mode rubocop org-beautify-theme org-pretty-table org go-complete inf-ruby ggtags cargo-mode org-journal cargo elmacro flycheck-rust edit-indirect inf-clojure flymd flycheck-mypy scala-mode adoc-mode flycheck-haskell flymake-haskell-multi haskell-mode haskell-snippets web-mode htmlize autopair ace-jump-mode org-gnus helm-notmuch notmuch org-mime bbdb visual-fill-column mu4e-multi mu4e go-snippets go-snippet unicode-fonts--instructions ag coffee-mode helm-ag evil-leader use-package evil-smartparens flycheck-tip evil-mode flycheck-ledger flycheck flycheck-clojure evil gmail-message-mode gmail-mode edit-server-htmlize rust-mode clojure-jump-to-file protobuf-mode midje-mode gist yaml-mode unicode-fonts sql-indent smartparens rainbow-delimiters pretty-symbols powerline org-bullets neotree monokai-theme markdown-mode magit leuven-theme js2-mode helm-projectile helm-git git-gutter edit-server company-web company-restclient company-go company-emoji color-theme-solarized clj-refactor auto-complete-rst ace-flyspell ac-ispell ac-cider)))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
  '(safe-local-variable-values
@@ -607,7 +607,7 @@
         vrih-eshell
         vrih-mouse
         vrih-ido
-        vrih-evil
+;        vrih-evil
         vrih-projectile
         vrih-markdown
         vrih-restclient
@@ -977,3 +977,7 @@
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+(use-package evil-mc
+  :ensure t) 
+ (global-evil-mc-mode 1)
