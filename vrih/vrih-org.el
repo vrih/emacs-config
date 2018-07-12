@@ -30,7 +30,7 @@
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((plantuml . t)
-     (sh . t)
+     ;(sh . t)
      (dot . t)
      (python . t)
      (sql . t))))

@@ -10,8 +10,8 @@
 ;  :ensure t)
 
 
-(use-package clj-refactor
-  :ensure t)
+;; (use-package clj-refactor
+;;   :ensure t)
 
 ;(use-package cider
 ;  :bind (:cider-mode-map ("C-c C-d" . ac-nrepl-popup-doc))
