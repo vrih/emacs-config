@@ -13,8 +13,7 @@
   ("G"  (progn (goto-char (point-max)) (flycheck-previous-error)) "Last")
   ("q"  nil))
 
-(evil-leader/set-key "e" 'hydra-flycheck/body)
-
+(global-set-key (kbd "C-c e") 'hydra-flycheck/body)
 
 (defhydra hydra-projectile-other-window (:color teal)
   "projectile-other-window"
@@ -56,5 +55,5 @@
   ("`"   hydra-projectile-other-window/body "other window")
   ("q"   nil "cancel" :color blue))
 
-(evil-leader/set-key "p" 'hydra-projectile/body)
+(global-set-key (kbd "C-c P") 'hydra-projectile/body)
 (provide 'vrih-hydra)

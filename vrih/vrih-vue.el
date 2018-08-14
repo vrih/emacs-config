@@ -13,15 +13,6 @@
    ("R" (lambda nil (interactive) (compile "yarn lint")))
    ("C" (lambda nil (interactive)(rspec-verify-all)(rubocop-check-project))))
 
-(use-package ruby-mode
-  :ensure t
-  :init (setq ruby-insert-encoding-magic-comment nil)
-  (setq ruby-deep-indent-paren nil)
-  (add-hook 'ruby-mode-hook
-            (lambda ()
-              (flycheck-mode 1)
-              (local-set-key  (kbd "C-c r") 'hydra-ruby/body)
-              (push '("=>" . ?⇒) prettify-symbols-alist))))
 
 (use-package vue-html-mode
   :ensure t
@@ -29,7 +20,7 @@
                   (lambda ()
                     (flycheck-mode 1)
                     (local-set-key  (kbd "C-c r") 'hydra-vue/body)
-                    (push '("=>" . ?⇒) prettify-symbols-alist)))
+                    (push '("=>" . ?⇒) prettify-symbols-alist))))
 
 (use-package vue-mode
   :ensure t

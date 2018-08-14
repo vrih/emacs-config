@@ -6,8 +6,18 @@
 
 (setq js2-highlight-level 3)
 
+(use-package flycheck-jest
+  :ensure t
+  :config
+  (flycheck-jest-setup)
+  )
+
+(use-package eslint-fix
+  :ensure t)
+
 (add-hook 'js-mode-hook 
           (lambda () (flycheck-mode t)
+            (setq js-indent-level 2)
             (setq tab-width 2)))
 
 

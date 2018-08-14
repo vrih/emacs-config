@@ -14,10 +14,10 @@
 
 (projectile-register-project-type 'yarn '("package.json")
 				  :compile "yarn build"
-				  :test "yarn test"
+				  :test "yarn test:unit"
 				  :run "yarn dev"
 				  :test-suffix ".spec"
-                                  :test-dir "test/")
+                                  :test-dir "tests/")
 (use-package helm-ag
   :ensure t)
 
