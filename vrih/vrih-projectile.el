@@ -41,10 +41,10 @@
   "
      Find File            Search/Tags          Buffers                Cache
 ------------------------------------------------------------------------------------------
-  _f_: file             _a_: ag                _i_: Ibuffer           _c_: cache clear
+  _f_: file            _a_: ag                _i_: Ibuffer           _c_: cache clear
   _r_: recent file     _g_: update gtags      _b_: switch to buffer  _x_: remove known project
   _d_: dir             _o_: multi-occur     _s-k_: Kill all buffers  _X_: cleanup non-existing
-                                                                 ^^^^_z_: cache current
+                                                               ^^^^_z_: cache current
 "
 
   ("a"   projectile-ag)
