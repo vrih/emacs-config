@@ -33,7 +33,7 @@
  '(compilation-message-face (quote default))
  '(custom-safe-themes
    (quote
-    ("9a155066ec746201156bb39f7518c1828a73d67742e11271e4f24b7b178c4710" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "38ba6a938d67a452aeb1dada9d7cdeca4d9f18114e9fc8ed2b972573138d4664" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "3ac266781ee0ac3aa74a6913a1506924cad669f111564507249f0ffa7c5e4b53" "196cc00960232cfc7e74f4e95a94a5977cb16fd28ba7282195338f68c84058ec" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "60f04e478dedc16397353fb9f33f0d895ea3dab4f581307fbf0aa2f07e658a40" default)))
+    ("c3d4af771cbe0501d5a865656802788a9a0ff9cf10a7df704ec8b8ef69017c68" "9a155066ec746201156bb39f7518c1828a73d67742e11271e4f24b7b178c4710" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "38ba6a938d67a452aeb1dada9d7cdeca4d9f18114e9fc8ed2b972573138d4664" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "3ac266781ee0ac3aa74a6913a1506924cad669f111564507249f0ffa7c5e4b53" "196cc00960232cfc7e74f4e95a94a5977cb16fd28ba7282195338f68c84058ec" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "60f04e478dedc16397353fb9f33f0d895ea3dab4f581307fbf0aa2f07e658a40" default)))
  '(fci-rule-color "#49483E")
  '(highlight-changes-colors (quote ("#FD5FF0" "#AE81FF")))
  '(highlight-tail-colors
@@ -56,10 +56,12 @@
  '(magit-diff-section-arguments (quote ("--no-ext-diff")))
  '(magit-diff-use-overlays nil)
  '(magit-stash-arguments nil)
- '(org-agenda-files (quote ("~/Dropbox/Documents/todo.org")))
+ '(org-agenda-files
+   (quote
+    ("~/Dropbox/journal/20181001" "~/Dropbox/bsm/clients/nielsen/master-notes.org" "~/Dropbox/Documents/todo.org")))
  '(package-selected-packages
    (quote
-    (company-terraform flycheck-jest eslint-fix evil-mc vue-mode vue-html-mode json-mode editorconfig projectile-rails rspec-mode rubocop org-beautify-theme org-pretty-table org go-complete inf-ruby ggtags cargo-mode org-journal cargo elmacro flycheck-rust edit-indirect inf-clojure flymd flycheck-mypy scala-mode adoc-mode flycheck-haskell flymake-haskell-multi haskell-mode haskell-snippets web-mode htmlize autopair ace-jump-mode org-gnus helm-notmuch notmuch org-mime bbdb visual-fill-column mu4e-multi mu4e go-snippets go-snippet unicode-fonts--instructions ag coffee-mode helm-ag evil-leader use-package evil-smartparens flycheck-tip evil-mode flycheck-ledger flycheck flycheck-clojure evil gmail-message-mode gmail-mode edit-server-htmlize rust-mode clojure-jump-to-file protobuf-mode midje-mode gist yaml-mode unicode-fonts sql-indent smartparens rainbow-delimiters pretty-symbols powerline org-bullets neotree monokai-theme markdown-mode magit leuven-theme js2-mode helm-projectile helm-git git-gutter edit-server company-web company-restclient company-go company-emoji color-theme-solarized clj-refactor auto-complete-rst ace-flyspell ac-ispell ac-cider)))
+    (iedit groovy-mode yari company-terraform flycheck-jest eslint-fix evil-mc vue-mode vue-html-mode json-mode editorconfig projectile-rails rspec-mode rubocop org-beautify-theme org-pretty-table org go-complete inf-ruby ggtags cargo-mode org-journal cargo elmacro flycheck-rust edit-indirect inf-clojure flymd flycheck-mypy scala-mode adoc-mode flycheck-haskell flymake-haskell-multi haskell-mode haskell-snippets web-mode htmlize autopair ace-jump-mode org-gnus helm-notmuch notmuch org-mime bbdb visual-fill-column mu4e-multi mu4e go-snippets go-snippet unicode-fonts--instructions ag coffee-mode helm-ag evil-leader use-package evil-smartparens flycheck-tip evil-mode flycheck-ledger flycheck flycheck-clojure evil gmail-message-mode gmail-mode edit-server-htmlize rust-mode clojure-jump-to-file protobuf-mode midje-mode gist yaml-mode unicode-fonts sql-indent smartparens rainbow-delimiters pretty-symbols powerline org-bullets neotree monokai-theme markdown-mode magit leuven-theme js2-mode helm-projectile helm-git git-gutter edit-server company-web company-restclient company-go company-emoji color-theme-solarized clj-refactor auto-complete-rst ace-flyspell ac-ispell ac-cider)))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
  '(safe-local-variable-values
@@ -565,14 +567,14 @@
    (unspecified "#272822" "#49483E" "#A20C41" "#F92672" "#67930F" "#A6E22E" "#968B26" "#E6DB74" "#21889B" "#66D9EF" "#A41F99" "#FD5FF0" "#349B8D" "#A1EFE4" "#F8F8F2" "#F8F8F0")))
 
 ;;graphics
-(set-face-attribute 'default nil :font "Source Code Pro" :height 100)
+(set-face-attribute 'default nil :font "Inconsolata" :height 120)
 
 
 (when (member "EmojiOne" (font-family-list))
   (set-fontset-font t 'unicode "EmojiOne" nil 'prepend))
 ;; Use monkoai theme on graphical systems
 (when (display-graphic-p)
-    (load-theme 'leuven t))
+    (load-theme 'monokai t))
 
 ;disable backup
 (setq backup-inhibited t)
@@ -982,3 +984,13 @@
 (use-package evil-mc
   :ensure t) 
  (global-evil-mc-mode 1)
+
+
+(use-package groovy-mode
+  :ensure t
+  :defer t
+  :init (add-to-list 'auto-mode-alist '("Jenkinsfile" . groovy-mode)))
+
+(use-package iedit
+  :ensure t
+  :defer t)
