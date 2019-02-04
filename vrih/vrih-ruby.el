@@ -38,5 +38,7 @@
 (use-package rspec-mode
   :ensure t)
 
+(use-package robe
+  :ensure t)
 
 (provide 'vrih-ruby)

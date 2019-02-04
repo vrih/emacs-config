@@ -1,5 +1,5 @@
 (use-package org-journal
-  :init (setq org-journal-dir "~/Dropbox/journal/")
+  :init (setq org-journal-dir "~/Documents/journal/")
   :ensure t
   )
 

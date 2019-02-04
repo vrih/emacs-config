@@ -1,7 +1,10 @@
 (use-package terraform-mode
   :ensure t
   :defer t
-  :mode ("\\.tf\\'" . terraform-mode))
+  :bind (("C-c c" . (lambda () (interactive) (shell-command "make plan"))))
+  :mode ("\\.tf\\'" . terraform-mode)
+  :init (setq projectile-project-test-cmd  "make plan")
+  (setq projectile-project-run-cmd "make apply"))
 
 (use-package company-terraform
   :ensure t

@@ -4,7 +4,7 @@
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command (concat "pandoc -c " (getenv "HOME") "/Dropbox/pandoc.css -f markdown -t html5 --mathjax --highlight-style pygments --standalone"))
+  :init (setq markdown-command (concat "pandoc -c " (getenv "HOME") "/Documents/pandoc.css -f markdown -t html5 --mathjax --highlight-style pygments --standalone"))
   (setq markdown-split-window-direction "right")
 )
 
