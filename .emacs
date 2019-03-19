@@ -1,9 +1,5 @@
-(tool-bar-mode -1)
-(menu-bar-mode -1)
-(scroll-bar-mode -1)
-
 (defun my-buffer-face-mode-variable ()
-   "Set font to a variable width (proportional) fonts in current buffer"
+   "Set font to a variable width (proportional) fonts in current buffer."
    (interactive)
    (setq buffer-face-mode-face '(:family "Noto Sans" :height 120 :width semi-condensed))
    (buffer-face-mode))
@@ -46,19 +42,9 @@
      ("#A75B00" . 70)
      ("#F309DF" . 85)
      ("#3C3D37" . 100))))
- '(ledger-reports
-   (quote
-    (("assets" "ledger ")
-     ("bal" "ledger -f %(ledger-file) bal")
-     ("reg" "ledger -f %(ledger-file) reg")
-     ("payee" "ledger -f %(ledger-file) reg @%(payee)")
-     ("account" "ledger -f %(ledger-file) reg %(account)"))) t)
  '(magit-diff-section-arguments (quote ("--no-ext-diff")))
  '(magit-diff-use-overlays nil)
  '(magit-stash-arguments nil)
- '(org-agenda-files
-   (quote
-    ("~/Dropbox/journal/20181001" "~/Dropbox/bsm/clients/nielsen/master-notes.org" "~/Dropbox/Documents/todo.org")))
  '(package-selected-packages
    (quote
     (counsel-projectile all-the-icons-ivy counsel ivy graphviz-dot-mode robe zenburn-theme iedit groovy-mode yari company-terraform flycheck-jest eslint-fix evil-mc vue-mode vue-html-mode json-mode editorconfig projectile-rails rspec-mode rubocop org-beautify-theme org-pretty-table org go-complete inf-ruby ggtags cargo-mode org-journal cargo elmacro flycheck-rust edit-indirect inf-clojure flymd flycheck-mypy scala-mode adoc-mode flycheck-haskell flymake-haskell-multi haskell-mode haskell-snippets web-mode htmlize autopair ace-jump-mode org-gnus helm-notmuch notmuch org-mime bbdb visual-fill-column mu4e-multi mu4e go-snippets go-snippet unicode-fonts--instructions ag coffee-mode helm-ag evil-leader use-package evil-smartparens flycheck-tip evil-mode flycheck-ledger flycheck flycheck-clojure evil gmail-message-mode gmail-mode edit-server-htmlize rust-mode clojure-jump-to-file protobuf-mode midje-mode gist yaml-mode unicode-fonts sql-indent smartparens rainbow-delimiters pretty-symbols powerline org-bullets neotree monokai-theme markdown-mode magit leuven-theme js2-mode helm-projectile helm-git git-gutter edit-server company-web company-restclient company-go company-emoji color-theme-solarized clj-refactor auto-complete-rst ace-flyspell ac-ispell ac-cider)))
@@ -567,15 +553,15 @@
    (quote
     (unspecified "#272822" "#3C3D37" "#F70057" "#F92672" "#86C30D" "#A6E22E" "#BEB244" "#E6DB74" "#40CAE4" "#66D9EF" "#FB35EA" "#FD5FF0" "#74DBCD" "#A1EFE4" "#F8F8F2" "#F8F8F0"))))
 
-;;graphics
-(set-face-attribute 'default nil :font "Inconsolata" :height 120)
+(add-to-list 'load-path (concat (getenv "HOME") "/emacs-config/vrih"))
 
-
-(when (member "EmojiOne" (font-family-list))
-  (set-fontset-font t 'unicode "EmojiOne" nil 'prepend))
-;; Use monkoai theme on graphical systems
-(when (display-graphic-p)
-    (load-theme 'zenburn t))
+(require 'subr-x)
+(require 'vrih-packages)
+(dolist (file
+	 (directory-files (concat (getenv "HOME") "/emacs-config/vrih")
+			  nil
+			  "^vrih-.*el$"))
+  (require (intern (string-trim-right file ".el"))))
 
 ;disable backup
 (setq backup-inhibited t)
@@ -584,94 +570,33 @@
 
 ; always indent with spaces
 (setq-default indent-tabs-mode nil)
-(setq inhibit-startup-screen t)
+
 (setq transient-mark-mode t)
-(global-font-lock-mode)
+
 (auto-compression-mode)
-(show-paren-mode)
-(auto-image-file-mode)
-(blink-cursor-mode 0)
 
 (global-set-key "\M-/" 'hippie-expand)
 
-;; org mode
-(add-to-list 'load-path (concat (getenv "HOME") "/emacs-config/vrih"))
-
-(setq vrih-pkg-full
-      '(vrih-hydra
-        vrih-org
-        vrih-org-journal
-        vrih-rust
-        vrih-sql
-        vrih-harvest
-        vrih-python
-        vrih-js
-        vrih-ledger
-        vrih-eshell
-        vrih-mouse
-        vrih-ido
-;        vrih-evil
-        vrih-projectile
-        vrih-markdown
-        vrih-restclient
-                                        ;    vrih-mu4e
-        vrih-ruby
-        vrih-vue
-        vrih-terraform
-        vrih-packages))
-
-(dolist (file vrih-pkg-full)
-  (require file))
-
-
-(setq vrih-pkg-files
-      '("vrih-clojure.el"
-        "vrih-helm.el"
-        "vrih-magit.el"
-        "vrih-smartparens.el"))
-
-(dolist (file vrih-pkg-files)
-  (load file))
-
 ;;pretty print json
 (defun json-format ()
+  "Format region as pretty printed JSON using python."
   (interactive)
   (save-excursion
     (shell-command-on-region (mark) (point) "python -m json.tool" (buffer-name) t)))
 
 (defvar libnotify-program "/usr/bin/notify-send")
 
-(defun notify-send (title message)
-  (start-process "notify" " notify"
-		 libnotify-program "--expire-time=4000" title message))
-
-
-;;; Lisp (SLIME) interaction
-;(setq inferior-lisp-program "clisp")
-;(add-to-list 'load-path "~/.slime")
-;(require 'slime)
-;(slime-setup)
-
-;; Smartparens?
-;(require 'smartparens-config)
-
-;; Pretty symbols
-;(require 'pretty-symbols)
-
 (add-hook 'after-init-hook 'global-company-mode)
 
-
 (defun vrih-hour-code ()
+  "Insert the current hour code."
   (interactive)
   (insert (format "%d" (/ (float-time) 3600))))
 
 (defun vrih-period ()
+  "Insert the current day code."
   (interactive)
   (insert (format "%d" (/ (float-time) 86400)))16531)
-
-
-;(eval-after-load "sql"
-;      (load-library "sql-indent"))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -685,76 +610,6 @@
 (setq x-select-enable-clipboard t
       x-select-enable-primary t)
 
-;;; Mode line config
-;(powerline-default-theme)
-
-(setq mode-line-position
-      '((line-number-mode ("%l" (column-number-mode ":%c")))))
-
-(setq default-mode-line-format
-      '("%e"
-        mode-line-position))
-(defun shorten-directory (dir max-length)
-  "Show up to `max-length' characters of a directory name `dir'."
-  (let ((path (reverse (split-string (abbreviate-file-name dir) "/")))
-               (output ""))
-       (when (and path (equal "" (car path)))
-         (setq path (cdr path)))
-       (while (and path (< (length output) (- max-length 4)))
-         (setq output (concat (car path) "/" output))
-         (setq path (cdr path)))
-       (when path
-         (setq output (concat "…/" output)))
-       output))
-
-(defvar mode-line-directory
-  '(:propertize
-    (:eval (if (buffer-file-name) (concat " " (shorten-directory default-directory 20)) " "))
-                face mode-line)
-  "Formats the current directory.")
-(put 'mode-line-directory 'risky-local-variable t)
-
-(setq-default mode-line-buffer-identification
-  (propertized-buffer-identification "%b "))
-
-;; change definition of vc-mode-line
-;; (defadvice vc-mode-line (after strip-backend () activate)
-;;   (when (stringp vc-mode)
-;;     (let ((gitlogo (replace-regexp-in-string "^ Git." ":" vc-mode)))
-;;       (setq vc-mode gitlogo))))
-
-(defun replace-git-with-logo (orig-func &rest args)
-  (when (stringp vc-mode)
-    (let ((gitlogo (replace-regexp-in-string "Git" "" vc-mode)))
-      (setq vc-mode gitlogo))))
-
-(advice-add 'vc-mode-line :after #'replace-git-with-logo)
-
-(setq-default mode-line-format
-      '("%e"
-        mode-line-front-space
-        ;; mode-line-mule-info -- I'm always on utf-8
-        mode-line-client
-        mode-line-modified
-        ;; mode-line-remote -- no need to indicate this specially
-        ;; mode-line-frame-identification -- this is for text-mode emacs only
-        " "
-        mode-line-directory
-        mode-line-buffer-identification
-        " "
-        mode-line-position
-
-        (vc-mode vc-mode)
-
-        ;;(vc-mode vc-mode)  -- I use magit, not vc-mode
-        (flycheck-mode flycheck-mode-line)
-        " "
-        mode-line-modes
-        mode-line-misc-info
-        mode-line-end-spaces))
-;;; End mde line config
-
-
 (use-package edit-server
   :init (edit-server-start)
   :ensure t)
@@ -767,171 +622,43 @@
                            (match-string 2) "/"
                            (match-string 1)) nil nil)))
 
-(defun my-fahr-to-cels (x)
-  "Convert fahrenheit to cels"
-  (* (- x 32) (/ 5.0 9)))
+(defun my-fahr-to-cels (fahrenheit)
+  "Convert FAHRENHEIT to celsius."
+  (* (- fahrenheit 32) (/ 5.0 9)))
 
 (setq browse-url-generic-program "firefox" )
 
 (global-set-key [remap dabbrev-expand] 'hippie-expand)
-
-
   (eval-after-load 'edit-server
     '(add-to-list 'edit-server-url-major-mode-alist
                   '("inbox\\.google\\." . gmail-message-edit-server-mode)))
 
 ;(require 'persistent-soft)
-(use-package unicode-fonts
-  :init (unicode-fonts-setup)
-  :ensure t)
-
-(defun my-dec-to-ip (dec)
-  "Convert decimal value to ip"
-  (if (> dec 255)
+(defun my-dec-to-ip (decimal)
+  "Convert DECIMAL value to ip."
+  (if (> decimal 255)
       (concat
-       (my-dec-to-ip (ash dec -8))
+       (my-dec-to-ip (ash decimal -8))
        "."
-       (number-to-string (logand dec 255)))
-    (number-to-string (logand dec 255))))
-
+       (number-to-string (logand decimal 255)))
+    (number-to-string (logand decimal 255))))
 
 ;; ace jump mode
-(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
-
-(add-hook 'emacs-lisp-mode-hook
-          (lambda () (progn '(
-                              (rainbow-delimiters-mode)
-                              (smartparens-mode)
-                              ))))
+(use-package ace-jump-mode
+  :init (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+  :ensure t)
           
 ;; stop tramp hanging
 (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
-
-(use-package rainbow-delimiters
-  :init (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
-  (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)
-  :ensure t)
-
 
 (add-hook 'mail-mode-hook 'turn-on-visual-line-mode)
 (server-start)
 (add-hook 'rst-mode-hook 'my-buffer-face-mode-variable)
 (add-hook 'rst-mode-hook 'turn-on-auto-fill)
-;(add-hook 'rst-mode-hook 'flyspell-mode-on)
 
-(add-hook 'org-mode-hook 'turn-on-auto-fill)
-;(add-hook 'org-mode-hook 'flyspell-mode-on)
-
-(add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
-
-(add-hook 'mail-mode-hook 'my-buffer-face-mode-variable)
-;(add-hook 'mail-mode-hook 'flyspell-mode-on)
-
-;(require 'bbdb)
-
-;; initialization
-;(bbdb-initialize 'gnus 'message)
-;(bbdb-mua-auto-update-init 'gnus 'message)
-
-;; size of the bbdb popup
-;(setq bbdb-pop-up-window-size 0.15)
-;(setq bbdb-mua-pop-up-window-size 0.15)
-
-;; What do we do when invoking bbdb interactively
-;(setq bbdb-mua-update-interactive-p '(query . create))
-
-;; Make sure we look at every address in a message and not only the
-;; first one
-;(setq bbdb-message-all-addresses t)
-
-;; use ; on a message to invoke bbdb interactively
-;(add-hook
-; 'gnus-summary-mode-hook
-; (lambda ()
-;    (define-key gnus-summary-mode-map (kbd ";") 'bbdb-mua-edit-field)))
-
-(use-package hydra
-  :ensure t)
-
-;; (require 'org-mime)
-;; (setq org-mime-library 'mml)
-
-
-
-;;; notmuch for gnus
-;; Gnus and notmuch ....
-;; - Sets up searching with notmuch, when looking at the message it's possible
-;; to switch to gnus article view with C-c C-c 
-;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(use-package notmuch
-  :init  (add-hook 'gnus-group-mode-hook 'lch-notmuch-shortcut)
-  :ensure t)
-
-;(use-package org-gnus
-;  :ensure t)
-
-(defun lch-notmuch-shortcut ()
-  (define-key gnus-group-mode-map "GG" 'notmuch-search)
-  )
-
-(defun notmuch-file-to-group (file)
-  "Calculate the Gnus group name from the given file name."
-
-  (let ((group (file-name-directory (directory-file-name (file-name-directory file)))))
-
-    (if (string-match ".*/Mail/Work" file)
-        (setq group (replace-regexp-in-string ".*/Mail/Work/" "nnimap+Work:Work/" group))
-        )
-    (if (string-match ".*/Mail/Personal" file)
-        (setq group (replace-regexp-in-string ".*/Mail/Personal/" "nnimap+Work:Personal/" group))
-        )
-
-    (setq group (replace-regexp-in-string "/$" "" group))
-    (if (string-match ":$" group)
-        (concat group "INBOX")
-      (replace-regexp-in-string ":\\." ":" group))))
-
-(defun notmuch-goto-message-in-gnus ()
-       "Open a summary buffer containing the current notmuch
-     article."
-       (interactive)
-       (unless (gnus-alive-p) (with-temp-buffer (gnus)))
-       (let ((group (notmuch-file-to-group (notmuch-show-get-filename)))
-     	(message-id
-     	 (replace-regexp-in-string "\"" ""
-     	  (replace-regexp-in-string "^id:" ""
-     				    (notmuch-show-get-message-id)))))
-         (if (and group message-id)
-     	(progn
-     	  (gnus-summary-read-group group 1) ; have to show at least one old message
-     	  (gnus-summary-refer-article message-id)) ; simpler than org-gnus method?
-           (message "Couldn't get relevant infos for switching to Gnus."))))
-
-(define-key notmuch-show-mode-map (kbd "C-c C-c") 'notmuch-goto-message-in-gnus)
-
-;(require 'bigquery-mode "~/GIT/emacs-config/bigquery-mode.el")
-
-(add-hook 'org-mode-hook
-          (lambda ()
-            (push '("[ ]" .  "☐") prettify-symbols-alist)
-            (push '("[X]" . "☒" ) prettify-symbols-alist)
-            (push '("[-]" . "◫" ) prettify-symbols-alist)
-            (prettify-symbols-mode)
-            ))
-
-(global-prettify-symbols-mode +1)
-
-(use-package visual-fill-column
-  :ensure t
-  :defer t
-  :config (setq-default visual-fill-column-center-text t
-                        visual-column-fringes-outside-margins nil
-                        visual-fill-column-width 100))
-
-
-    ;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph    
+ ;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
 (defun unfill-paragraph (&optional region)
-  "Takes a multi-line paragraph and makes it into a single line of text."
+  "Takes a multi-line REGION and make it into a single line of text."
   (interactive (progn (barf-if-buffer-read-only) '(t)))
   (let ((fill-column (point-max))
         ;; This would override `fill-column' if it's an integer.
@@ -941,63 +668,25 @@
 ;; Handy key definition
 (define-key global-map "\M-Q" 'unfill-paragraph)
 
-(add-hook 'rust-mode-hook
-          (lambda ()
-            
-              (push '("->" . ?→) prettify-symbols-alist)
-              (push '("=>" . ?⇒) prettify-symbols-alist)
-              ))
-(defun figwheel-repl ()
-  (interactive)
-  (inf-clojure "lein figwheel"))
-
-(add-hook 'clojure-mode-hook #'inf-clojure-minor-mode)
-
-
-(defun beta-to-prod (start end)
-  (interactive "r")
-  (replace-string "-beta" "" nil start end)
-  (replace-string "BETA" "PROD" nil start end)
-  (replace-string "YmV0YUNleW1aNlZzTWdzUnhpVXpRUTRoOng=" "Q2V5bVo2VnNNZ3NSeGlVelFRNGg6eA==" nil start end))
-
-(add-to-list 'safe-local-variable-values
-             '(markdown-command . "pandoc -c /home/daniel/Dropbox/Documents/self-serve/release-notes/pandoc.css -f markdown -t html5 --mathjax --highlight-style pygments --standalone"))
-
 (use-package editorconfig
   :ensure t
   :config
   (editorconfig-mode 1))
 
-(use-package go-autocomplete
-  :ensure t
-  :init (ac-config-default))
-
 (use-package multiple-cursors
   :ensure t)
-(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
-(use-package evil-mc
-  :ensure t) 
- (global-evil-mc-mode 1)
-
-
-(use-package groovy-mode
-  :ensure t
-  :defer t
-  :init (add-to-list 'auto-mode-alist '("Jenkinsfile" . groovy-mode)))
-
 (use-package iedit
   :ensure t
   :defer t)
-(put 'downcase-region 'disabled nil)
-
 
 (defadvice erase-buffer (around erase-buffer-noop)
-  "make erase-buffer do nothing")
+  "Make 'erase-buffer' do nothing.")
 
 (defadvice shell-command (around shell-command-unique-buffer activate compile)
   (if (or current-prefix-arg
@@ -1039,54 +728,52 @@
   (toggle-read-only))
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
-
-
 ;; ido imenu
-    (defun ido-goto-symbol (&optional symbol-list)
-      "Refresh imenu and jump to a place in the buffer using Ido."
-      (interactive)
-      (unless (featurep 'imenu)
-        (require 'imenu nil t))
+(defun ido-goto-symbol (&optional symbol-list)
+  "Refresh imenu and jump to a place in the buffer using Ido."
+  (interactive)
+  (unless (featurep 'imenu)
+    (require 'imenu nil t))
+  (cond
+   ((not symbol-list)
+    (let ((ido-mode ido-mode)
+          (ido-enable-flex-matching
+           (if (boundp 'ido-enable-flex-matching)
+               ido-enable-flex-matching t))
+          name-and-pos symbol-names position)
+      (unless ido-mode
+        (ido-mode 1)
+        (setq ido-enable-flex-matching t))
+      (while (progn
+               (imenu--cleanup)
+               (setq imenu--index-alist nil)
+               (ido-goto-symbol (imenu--make-index-alist))
+               (setq selected-symbol
+                     (ido-completing-read "Symbol? " symbol-names))
+               (string= (car imenu--rescan-item) selected-symbol)))
+      (unless (and (boundp 'mark-active) mark-active)
+        (push-mark nil t nil))
+      (setq position (cdr (assoc selected-symbol name-and-pos)))
       (cond
-       ((not symbol-list)
-        (let ((ido-mode ido-mode)
-              (ido-enable-flex-matching
-               (if (boundp 'ido-enable-flex-matching)
-                   ido-enable-flex-matching t))
-              name-and-pos symbol-names position)
-          (unless ido-mode
-            (ido-mode 1)
-            (setq ido-enable-flex-matching t))
-          (while (progn
-                   (imenu--cleanup)
-                   (setq imenu--index-alist nil)
-                   (ido-goto-symbol (imenu--make-index-alist))
-                   (setq selected-symbol
-                         (ido-completing-read "Symbol? " symbol-names))
-                   (string= (car imenu--rescan-item) selected-symbol)))
-          (unless (and (boundp 'mark-active) mark-active)
-            (push-mark nil t nil))
-          (setq position (cdr (assoc selected-symbol name-and-pos)))
-          (cond
-           ((overlayp position)
-            (goto-char (overlay-start position)))
-           (t
-            (goto-char position)))))
-       ((listp symbol-list)
-        (dolist (symbol symbol-list)
-          (let (name position)
-            (cond
-             ((and (listp symbol) (imenu--subalist-p symbol))
-              (ido-goto-symbol symbol))
-             ((listp symbol)
-              (setq name (car symbol))
-              (setq position (cdr symbol)))
-             ((stringp symbol)
-              (setq name symbol)
-              (setq position
-                    (get-text-property 1 'org-imenu-marker symbol))))
-            (unless (or (null position) (null name)
-                        (string= (car imenu--rescan-item) name))
-              (add-to-list 'symbol-names name)
-              (add-to-list 'name-and-pos (cons name position))))))))
-    (global-set-key "\C-ci" 'ido-goto-symbol) ; or any key you see fit
+       ((overlayp position)
+        (goto-char (overlay-start position)))
+       (t
+        (goto-char position)))))
+   ((listp symbol-list)
+    (dolist (symbol symbol-list)
+      (let (name position)
+        (cond
+         ((and (listp symbol) (imenu--subalist-p symbol))
+          (ido-goto-symbol symbol))
+         ((listp symbol)
+          (setq name (car symbol))
+          (setq position (cdr symbol)))
+         ((stringp symbol)
+          (setq name symbol)
+          (setq position
+                (get-text-property 1 'org-imenu-marker symbol))))
+        (unless (or (null position) (null name)
+                    (string= (car imenu--rescan-item) name))
+          (add-to-list 'symbol-names name)
+          (add-to-list 'name-and-pos (cons name position))))))))
+(global-set-key "\C-ci" 'ido-goto-symbol) ; or any key you see fit

@@ -23,7 +23,14 @@
            "* %T %?\n  %i" :clock-keep :clock-start)))
   (setq org-outline-path-complete-in-steps nil)
   (add-hook 'org-mode-hook 'flyspell-mode)
-            :bind (("C-c c" . org-capture)
+  (add-hook 'org-mode-hook 'turn-on-auto-fill)
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (push '("[ ]" . "☐") prettify-symbols-alist)
+              (push '("[X]" . "☒" ) prettify-symbols-alist)
+              (push '("[-]" . "◫" ) prettify-symbols-alist)
+              (prettify-symbols-mode)))
+  :bind (("C-c c" . org-capture)
          ("C-x a" . org-agenda-list))
   :ensure t
   :config

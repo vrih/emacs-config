@@ -17,3 +17,5 @@
 
 
 (provide 'vrih-hydra)
+
+;;; vrih-hydra.el ends here

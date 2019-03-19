@@ -1,14 +1,12 @@
 (projectile-mode +1)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
 (projectile-register-project-type 'yarn '("package.json")
 				  :compile "yarn build"
 				  :test "yarn test:unit"
 				  :run "yarn dev"
 				  :test-suffix ".spec"
                                   :test-dir "tests/")
-(use-package helm-ag
-  :ensure t)
-
 (use-package ggtags
   :ensure t)
 
@@ -26,7 +24,7 @@
 (defhydra hydra-projectile (:color teal
                             :hint nil)
   "
-     Find File            Search/Tags          Buffers                Cache
+   Find File            Search/Tags            Buffers                Cache
 ------------------------------------------------------------------------------------------
   _f_: file            _a_: ag                _i_: Ibuffer           _c_: cache clear
   _r_: recent file     _g_: update gtags      _b_: switch to buffer  _x_: remove known project
@@ -46,7 +44,7 @@
   ("s-k" projectile-kill-buffers)
   ("m"   projectile-multi-occur)
   ("o"   projectile-multi-occur)
-  ("p"   helm-projectile)
+  ("p"   counsel-projectile)
   ("s"   projectile-switch-project)
   ("r"   projectile-recentf)
   ("t"   projectile-toggle-between-implementation-and-test)
