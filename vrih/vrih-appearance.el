@@ -16,7 +16,7 @@
 
 ;; Use zenburn theme on graphical systems
 (when (display-graphic-p)
-  (load-theme 'zenburn t))
+  (load-theme 'leuven t))
 
 (use-package unicode-fonts
   :init (unicode-fonts-setup)
