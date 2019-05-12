@@ -7,8 +7,6 @@
   (setq org-html-html5-fancy t)
   (setq org-html-checkbox-type 'unicode)
   (setq org-html-use-unicode-chars t)
-  (setq org-todo-keywords
-        '((sequence "☐" "WAITING" "▣" "|" "☑" "CANCELLED")))
   (setq org-refile-targets (quote ((nil :maxlevel . 9)
                                    (org-agenda-files :maxlevel . 9))))
   (setq org-src-fontify-natively t); syntax highlighting
@@ -31,6 +29,7 @@
               (push '("[-]" . "◫" ) prettify-symbols-alist)
               (prettify-symbols-mode)))
   :bind (("C-c c" . org-capture)
+         ("C-c h" . org-html-export-to-html)
          ("C-x a" . org-agenda-list))
   :ensure t
   :config

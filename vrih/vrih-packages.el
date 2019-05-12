@@ -17,6 +17,20 @@
 
 (add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
                                         ; list the packages you want
+(use-package company-quickhelp
+  :ensure t
+  :init (company-quickhelp-mode)
+  )
+
+(use-package flycheck-pos-tip
+  :ensure t)
+
+(with-eval-after-load 'flycheck
+  (flycheck-pos-tip-mode))
+
+(eval-after-load 'company
+  '(define-key company-active-map (kbd "C-c h") #'company-quickhelp-manual-begin))
+
 (defvar package-list '(flycheck
                        use-package
                        company

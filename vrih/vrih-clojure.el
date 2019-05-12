@@ -24,15 +24,11 @@
   (add-hook 'cider-repl-mode-hook 'ac-cider-setup)
   :ensure t)
 
-                                        ;(require 'clj-refactor)
-
-;(require 'clojure-jump-to-file)
-
-(require 'ac-cider)
-(eval-after-load "auto-complete"
-  '(progn
-     (add-to-list 'ac-modes 'cider-mode)
-     (add-to-list 'ac-modes 'cider-repl-mode)))
+;; (require 'ac-cider)
+;; (eval-after-load "auto-complete"
+;;   '(progn
+;;      (add-to-list 'ac-modes 'cider-mode)
+;;      (add-to-list 'ac-modes 'cider-repl-mode)))
 
 (add-hook 'clojure-mode-hook #'eldoc-mode)
 (add-hook 'clojure-mode-hook (lambda () (setq compile-command "lein uberjar")))

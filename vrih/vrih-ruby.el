@@ -28,6 +28,9 @@
   :ensure t
   :init (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode))
 
+(use-package rvm
+  :ensure t)
+
 (use-package projectile-rails
   :ensure t
   :init (projectile-rails-global-mode))
@@ -39,6 +42,10 @@
   :ensure t)
 
 (use-package robe
-  :ensure t)
+  :ensure t
+  :init (eval-after-load 'company
+          '(push 'company-robe company-backends))
+  (add-hook 'ruby-mode-hook 'robe-mode)
+  )
 
 (provide 'vrih-ruby)

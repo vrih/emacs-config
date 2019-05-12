@@ -3,7 +3,7 @@
   :ensure t
   :init (add-hook 'magit-diff-mode-hook
                   (lambda () (local-set-key (kbd "<M-RET>")
-                                       'magit-diff-visit-file-other-window))))
+                                       'magit-diff-visit-worktree-file-other-window))))
 
 (use-package git-gutter
   :ensure t

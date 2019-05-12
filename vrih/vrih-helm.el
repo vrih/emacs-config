@@ -9,6 +9,10 @@
          ("C-x r b" . counsel-bookmark)))
 
 
+(use-package counsel-etags
+  :ensure t
+  )
+
 (use-package counsel-projectile
   :ensure t
   :config 
