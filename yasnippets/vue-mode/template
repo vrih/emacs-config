@@ -1,0 +1,16 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: template
+# key: template
+# binding: direct-keybinding
+# --
+<template>
+</template>
+
+<script>
+export default {
+  props: { $1 },
+  data: () => ({
+    $2
+  }),
+};
+</script>

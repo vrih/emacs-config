@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: python
+# key: json_
+# --
+#+BEGIN_SRC json
+$0
+#+END_SRC
