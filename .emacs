@@ -20,7 +20,7 @@
 (load-file custom-file)
 
 (add-to-list 'load-path (concat (getenv "HOME") "/emacs-config/vrih"))
-(setq
+
 (require 'subr-x)
 (require 'vrih-packages)
 (dolist (file
