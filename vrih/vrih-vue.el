@@ -1,7 +1,7 @@
 (defhydra hydra-vue (:color blue :hint nil)
-"    Navigate            Test               Lint                    Rake
- ─────────────────────────────────────────────────────────────────────────────────
-    t toggle code/spec  s  test one spec   r rubocop auto correct   C rake
+"    Navigate            Test               Lint                 
+ ───────────────────────────────────────────────────
+    t toggle code/spec  s  test one spec   r lint fix project   
                         f  test file       R lint project                         
                         a  test all specs"
                
@@ -9,14 +9,13 @@
    ("s" rspec-verify-single)
    ("f" rspec-verify)
    ("a" (lambda nil (interactive) (compile "yarn test")))
-   ("r" (lambda nil (interactive)(rubocop-autocorrect-current-file)(revert-buffer nil 1)))
-   ("R" (lambda nil (interactive) (compile "yarn lint")))
-   ("C" (lambda nil (interactive)(rspec-verify-all)(rubocop-check-project))))
+   ("r" (lambda nil (interactive) (compile "yarn lint --fix")))
+   ("R" (lambda nil (interactive) (compile "yarn lint"))))
 
 
 (use-package vue-html-mode
   :ensure t
-  :init (add-hook 'vue-mode-hook
+  :init (add-hook 'vue-html-mode-hook
                   (lambda ()
                     (flycheck-mode 1)
                     (local-set-key  (kbd "C-c r") 'hydra-vue/body)
@@ -45,7 +44,7 @@
     "v-list-tile-action-text" "v-menu" "v-navigation-drawer" "v-pagination" "v-parallax" "v-time-picker"
     "v-progress-circular" "v-progress-linear" "v-rating" "v-sheet" "v-snackbar" "v-sparkline" "v-stepper"
     "v-stepper-step" "v-stepper-content" "v-stepper-header" "v-subheader" "v-timeline" "v-timeline-item"
-    "v-treeview"))
+    "v-treeview" "v-spacer"))
  
 (defun company-vuetify-backend (command &optional arg &rest ignored)
   (interactive (list 'interactive))
