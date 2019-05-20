@@ -31,34 +31,9 @@
               (local-set-key  (kbd "C-c r") 'hydra-vue/body)
               (push '("=>" . ?⇒) prettify-symbols-alist))))
 
-(defconst vuetify-completions
-  '("v-flex" "v-autocomplete" "v-dialog" "v-layout" "v-container" "v-data-table" "v-btn"
-    "v-date-picker" "v-icon" "v-tabs" "v-tab" "v-tab-item" "v-tabs-items" "v-toolbar" "v-system-bar"
-    "v-tooltip" "v-data-iterator" "v-chip" "v-carousel" "v-carousel-item" "v-card" "v-card-title"
-    "v-card-text" "v-card-actions" "v-img" "v-calendar" "v-speed-dial" "v-breadcrumbs" "v-breadcrumbs-item"
-    "v-bottom-sheet" "v-bottom-nav" "v-badge" "v-avatar" "v-alert" "v-edit-dialog" "v-divider" "v-expansion-panel"
-    "v-expansion-panel-content" "v-footer" "v-btn-toggle" "v-item-group" "v-item" "v-window" "v-window-item"
-    "v-hover" "v-combobox" "v-form" "v-input" "v-overflow-btn" "v-select" "v-radio-group" "v-radio" "v-switch"
-    "v-checkbox" "v-slider" "v-range-slider" "v-textarea" "v-text-field" "v-list" "v-list-tile" "v-list-group"
-    "v-list-action" "v-list-tile-avatar" "v-list-tile-content" "v-list-tile-tile" "v-list-tile-sub-tile"
-    "v-list-tile-action-text" "v-menu" "v-navigation-drawer" "v-pagination" "v-parallax" "v-time-picker"
-    "v-progress-circular" "v-progress-linear" "v-rating" "v-sheet" "v-snackbar" "v-sparkline" "v-stepper"
-    "v-stepper-step" "v-stepper-content" "v-stepper-header" "v-subheader" "v-timeline" "v-timeline-item"
-    "v-treeview" "v-spacer"))
- 
-(defun company-vuetify-backend (command &optional arg &rest ignored)
-  (interactive (list 'interactive))
-
-  (case command
-    (interactive (company-begin-backend 'company-vuetify-backend))
-    (prefix (and (eq major-mode 'vue-html-mode)
-                 (company-grab "v-\\w*")))
-    (candidates
-    (remove-if-not
-      (lambda (c) (string-prefix-p arg c))
-      vuetify-completions))))
-
-(add-to-list 'company-backends 'company-vuetify-backend)
+(add-to-list 'load-path "~/.emacs.d/local/company-vuetify")
+(use-package company-vuetify
+  :init (add-to-list 'company-backends 'company-vuetify))
 
 (provide 'vrih-vue)
 

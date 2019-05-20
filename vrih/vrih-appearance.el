@@ -5,7 +5,7 @@
 (use-package zenburn-theme
   :ensure t)
 
-(set-face-attribute 'default nil :font "Inconsolata" :height 120)
+(set-face-attribute 'default nil :font "Inconsolata" :height 130)
 
 (use-package rainbow-delimiters
   :init (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
