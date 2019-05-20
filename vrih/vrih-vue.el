@@ -25,6 +25,7 @@
   :ensure t
   :mode "\\.vue\\'"
   :init (setq tab-width 2)
+  (setq company-minimum-prefix-length 0)
   (add-hook 'vue-mode-hook
             (lambda ()
               (flycheck-mode 1)
