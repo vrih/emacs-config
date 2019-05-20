@@ -24,9 +24,10 @@
 (use-package vue-mode
   :ensure t
   :mode "\\.vue\\'"
-  :init (setq tab-width 2)
+  :init 
   (add-hook 'vue-mode-hook
             (lambda ()
+              (setq tab-width 2)
               (setq company-minimum-prefix-length 0)
               (flycheck-mode 1)
               (local-set-key  (kbd "C-c r") 'hydra-vue/body)
