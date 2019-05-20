@@ -25,9 +25,9 @@
   :ensure t
   :mode "\\.vue\\'"
   :init (setq tab-width 2)
-  (setq company-minimum-prefix-length 0)
   (add-hook 'vue-mode-hook
             (lambda ()
+              (setq company-minimum-prefix-length 0)
               (flycheck-mode 1)
               (local-set-key  (kbd "C-c r") 'hydra-vue/body)
               (push '("=>" . ?⇒) prettify-symbols-alist))))
