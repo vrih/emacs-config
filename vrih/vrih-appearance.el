@@ -2,7 +2,7 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 
-(use-package zenburn-theme
+(use-package solarized-theme
   :ensure t)
 
 (set-face-attribute 'default nil :font "Inconsolata" :height 130)
@@ -16,7 +16,7 @@
 
 ;; Use zenburn theme on graphical systems
 (when (display-graphic-p)
-  (load-theme 'leuven t))
+  (load-theme 'solarized-light t))
 
 (use-package unicode-fonts
   :init (unicode-fonts-setup)
