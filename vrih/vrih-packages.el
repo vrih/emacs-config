@@ -44,7 +44,6 @@
                        markdown-mode
                        monokai-theme
                        neotree
-                       paredit
                        pretty-symbols
                        projectile
                        yaml-mode

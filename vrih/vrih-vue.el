@@ -36,8 +36,7 @@
             (lambda ()
               (flycheck-mode 1)
               (local-set-key  (kbd "C-c r") 'hydra-vue/body)
-              (push '("=>" . ?⇒) prettify-symbols-alist)))
-  )
+              (push '("=>" . ?⇒) prettify-symbols-alist))))
 
 (add-to-list 'load-path "~/.emacs.d/local/company-vuetify")
 (use-package company-vuetify

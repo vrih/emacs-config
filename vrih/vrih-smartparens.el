@@ -1,7 +1,4 @@
-;(use-package smartparens-config
-;  :ensure t)
-
-(use-package smartparens
+ (use-package smartparens
   :bind (:map sp-keymap 
               ("C-M-f" . sp-forward-sexp)
               ("C-M-b" . sp-backward-sexp)
@@ -44,11 +41,9 @@
               (")" . sp-up-sexp))
   :ensure t
   :config
+  (require 'smartparens-config)
   (smartparens-global-mode t)
   (show-smartparens-global-mode t)
-  
 )
-
-
 
 (provide 'vrih-smartparens)
