@@ -12,6 +12,8 @@
    ("r" (lambda nil (interactive) (compile "yarn lint --fix")))
    ("R" (lambda nil (interactive) (compile "yarn lint"))))
 
+(use-package prettier-js
+  :ensure t)
 
 (use-package vue-html-mode
   :ensure t
@@ -30,6 +32,7 @@
               (setq tab-width 2)
               (setq company-minimum-prefix-length 0)
               (flycheck-mode 1)
+              (prettier-js-mode)
               (local-set-key  (kbd "C-c r") 'hydra-vue/body)
               (push '("=>" . ?⇒) prettify-symbols-alist)))
   (add-hook 'js-mode-hook
