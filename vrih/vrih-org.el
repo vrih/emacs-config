@@ -7,13 +7,14 @@
   (setq org-html-html5-fancy t)
   (setq org-html-checkbox-type 'unicode)
   (setq org-html-use-unicode-chars t)
+  (setq org-confirm-babel-evaluate nil)
   (setq org-refile-targets (quote ((nil :maxlevel . 9)
                                    (org-agenda-files :maxlevel . 9))))
   (setq org-src-fontify-natively t); syntax highlighting
   (setq org-export-htmlize-output-type 'css)
   (add-to-list 'load-path "~/emacs-config/org-reveal/")
   (setq org-reveal-root "file:///home/daniel.bowtell/apps/revealjs")
-  (setq org-plantuml-jar-path "/home/daniel.bowtell/Downloads/plantuml.jar")
+  (setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
   (setq org-capture-templates
         '(("t" "Todo" entry (file+headline "~/Dropbox/Documents/todo.org" "Tasks")
            "* TODO %?\n  %i")

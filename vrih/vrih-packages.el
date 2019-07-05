@@ -37,7 +37,6 @@
                        go-mode
                        edit-server-htmlize
                        gmail-message-mode
-                       color-theme
                        helm
                        helm-git
                        js2-mode
